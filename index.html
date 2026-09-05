@@ -123,7 +123,7 @@
     .modal-close:hover{color:var(--text);}
     .modal-body{padding:1.5rem;}
     .modal-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-bottom:1.5rem;}
-    .modal-gallery img{width:100%;border-radius:8px;object-fit:cover;height:160px;border:1px solid var(--border);}
+    .modal-gallery img{width:100%;border-radius:8px;object-fit:contain;max-height:400px;border:1px solid var(--border);background:var(--bg2);}
     .modal-gallery video{width:100%;border-radius:8px;border:1px solid var(--border);max-height:300px;}
     .modal-gallery iframe{width:100%;height:220px;border-radius:8px;border:1px solid var(--border);}
     .modal-desc{color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;}
@@ -211,8 +211,8 @@
     <img src="assets/photo.jpg" alt="Ahmed Riahi" class="hero-photo" onerror="this.src='https://avatars.githubusercontent.com/ahmedriaahi'">
   </div>
   <div class="hero-right fade-in">
-    <div class="status"><span class="dot"></span><span data-lang="fr">Disponible — Stages ou offres d'emploi </span><span data-lang="en">Available — Internships or work opportunity </span></div>
-    <p class="hero-tag"> Robotics & AI Engineer</p>
+    <div class="status"><span class="dot"></span><span data-lang="fr">Disponible — Stages de recherche</span><span data-lang="en">Available — Research Internships</span></div>
+    <p class="hero-tag">// Robotics & AI Engineer</p>
     <h1><span class="glitch" data-text="Ahmed Riahi">Ahmed Riahi</span></h1>
     <div class="typewriter"><span id="typewriter-text"></span><span class="cursor"></span></div>
     <p class="hero-sub">
@@ -244,9 +244,9 @@
     </div>
 
     <div class="timeline-item fade-in">
-      <div class="timeline-dot"></div> 
+      <div class="timeline-dot"></div>
       <div class="edu-card">
-        <div class="edu-bg" style="background-image:url('assets/iset.jpg')"></div>
+        <div class="edu-bg" style="background-image:url('assets/iset1.jpg')"></div>
         <div class="edu-content">
           <p class="edu-year">2023 — 2025</p>
           <p class="edu-title"><span data-lang="fr">Master — Robotique Avancée & Intelligence Artificielle</span><span data-lang="en">Master — Advanced Robotics & Artificial Intelligence</span></p>
@@ -258,7 +258,7 @@
     <div class="timeline-item fade-in">
       <div class="timeline-dot"></div>
       <div class="edu-card">
-        <div class="edu-bg" style="background-image:url('assets/iset.jpg')"></div>
+        <div class="edu-bg" style="background-image:url('assets/iset1.jpg')"></div>
         <div class="edu-content">
           <p class="edu-year">2020 — 2023</p>
           <p class="edu-title"><span data-lang="fr">Licence — Génie Électrique, Automatisme & Informatique Industrielle</span><span data-lang="en">Bachelor — Electrical Engineering & Industrial Automation</span></p>
@@ -270,7 +270,6 @@
     <div class="timeline-item fade-in">
       <div class="timeline-dot"></div>
       <div class="edu-card">
-        <div class="edu-bg" style="background-image:url('assets/lycee.jpg')"></div>
         <div class="edu-content">
           <p class="edu-year">2019 — 2020</p>
           <p class="edu-title"><span data-lang="fr">Baccalauréat Mathématiques</span><span data-lang="en">High School Diploma — Mathematics</span></p>
@@ -406,9 +405,7 @@
     </div>
 
     <div class="project-card fade-in" onclick="openModal('gesture')">
-      <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
-        <span style="font-size:3rem">✋</span>
-      </div>
+      <img src="assets/geste.jpg" alt="Reconnaissance Gestuelle" class="project-thumb" onerror="this.style.display='none'">
       <div class="project-body">
         <h3><span data-lang="fr">Reconnaissance Gestuelle</span><span data-lang="en">Gesture Recognition</span></h3>
         <p><span data-lang="fr">Détection des doigts en temps réel par vision artificielle.</span><span data-lang="en">Real-time finger detection using computer vision.</span></p>
@@ -533,7 +530,7 @@ const modals = {
   },
   techpower2:{
     title:'Stage de Perfectionnement — Tech Power Electronics Group',
-    gallery:[`<img src="assets/techpower2.jpg" alt="Machine Soudure">`],
+    gallery:[`<img src="assets/techpower1.png" alt="Machine Soudure">`],
     desc:`Étude et analyse fonctionnelle de la machine Soudure-de-Lames. Programmation du cycle de fonctionnement en Ladder pour une efficacité optimale. Optimisation du cycle automatisé avec gain de temps de production significatif.`,
     tags:['Ladder','Siemens','Automatisation','Analyse fonctionnelle'],
     links:[]
@@ -557,7 +554,7 @@ const modals = {
   },
   gesture:{
     title:'Reconnaissance Gestuelle par Vision Artificielle',
-    gallery:[`<img src="assets/geste.jpg" alt="dem app" >`],
+    gallery:[`<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7298771712739803136" allowfullscreen></iframe>`],
     desc:`Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel par vision artificielle. Utilisation d'OpenCV pour le traitement d'image et la détection des contours de la main.`,
     tags:['OpenCV','Python','Computer Vision','Real-time','MediaPipe'],
     links:[{label:'→ Voir démo LinkedIn',url:'https://www.linkedin.com/feed/update/urn:li:activity:7298771712739803136'}]
@@ -566,7 +563,7 @@ const modals = {
     title:'Système de Reconnaissance d\'Utilisateurs',
     gallery:[
       `<img src="assets/user1.png" alt="Ahmed 92.26%">`,
-      `<img src="assets/user2.jpg" alt="Messi 100%">`
+      `<img src="assets/user2.png" alt="Messi 100%">`
     ],
     desc:`Capturé et traité des images en temps réel avec identification via TensorFlow (Ahmed: 92.26%, Messi: 100%). Déploiement conteneurisé avec Docker pour assurer la portabilité du système sur tous les environnements.`,
     tags:['TensorFlow','OpenCV','Docker','Python','Deep Learning','CNN'],
