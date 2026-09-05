@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Riahi | Robotics & AI Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --card: #16161f;
+      --border: #2a2a3a;
+      --accent: #6366f1;
+      --accent2: #22d3ee;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --green: #10b981;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: 'Fira Code', monospace; color: var(--accent2); font-size: 1rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent2); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+    .hero-tag { font-family: 'Fira Code', monospace; color: var(--accent2); font-size: 0.875rem; margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: white; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+    .status { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--green); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1.5rem; }
+    .dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
+    .section-tag { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 3rem; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; }
+    .skill-card:hover { border-color: var(--accent); }
+    .skill-card h4 { color: var(--accent2); font-size: 0.8rem; font-family: 'Fira Code', monospace; margin-bottom: 0.75rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag { background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); color: var(--text); padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 1.5rem; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .exp-title { font-weight: 600; font-size: 1rem; }
+    .exp-company { color: var(--accent2); font-size: 0.875rem; }
+    .exp-date { color: var(--muted); font-size: 0.8rem; font-family: 'Fira Code', monospace; }
+    .exp-card ul { list-style: none; padding: 0; }
+    .exp-card ul li { color: var(--muted); font-size: 0.875rem; padding: 0.25rem 0; padding-left: 1rem; position: relative; }
+    .exp-card ul li::before { content: '▸'; color: var(--accent); position: absolute; left: 0; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+    .project-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+    .project-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .project-card p { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .project-link { color: var(--accent2); font-size: 0.8rem; text-decoration: none; font-family: 'Fira Code', monospace; }
+    .project-link:hover { text-decoration: underline; }
+
+    /* CONTACT */
+    .contact-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 3rem; text-align: center; }
+    .contact-box p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">~/ahmedriaahi</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="status"><span class="dot"></span> Open to Research Internships</div>
+    <p class="hero-tag">// Robotics & AI Engineer</p>
+    <h1>Ahmed <span>Riahi</span></h1>
+    <p class="hero-sub">Étudiant ingénieur en mécatronique spécialisé en robotique autonome, vision par ordinateur et IA embarquée.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">Voir mes projets</a>
+      <a href="#contact" class="btn-outline">Me contacter</a>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-tag">// 01. compétences</p>
+  <h2 class="section-title">Stack Technique</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h4>Frameworks & Libs</h4>
+      <div class="tags">
+        <span class="tag">ROS2 Humble</span><span class="tag">ROS1 Noetic</span><span class="tag">OpenCV</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Interfaces & Outils</h4>
+      <div class="tags">
+        <span class="tag">Qt6</span><span class="tag">TIA Portal</span><span class="tag">Docker</span><span class="tag">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Simulation & CAD</h4>
+      <div class="tags">
+        <span class="tag">Gazebo</span><span class="tag">RViz</span><span class="tag">Webots</span><span class="tag">SolidWorks</span><span class="tag">FreeCAD</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Domaines d'expertise</h4>
+      <div class="tags">
+        <span class="tag">SLAM</span><span class="tag">Vision par ordinateur</span><span class="tag">Navigation autonome</span><span class="tag">IA embarquée</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-tag">// 02. expérience</p>
+  <h2 class="section-title">Parcours Professionnel</h2>
+  <div class="exp-list">
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <p class="exp-title">Stage Ingénieur</p>
+          <p class="exp-company">WEMAKER (Startup)</p>
+        </div>
+        <span class="exp-date">07/2026 – 08/2026</span>
+      </div>
+      <ul>
+        <li>Développé un système de calibration automatique post-production pour pièces imprimées 3D, augmentant le débit de 7 à 95 pièces/jour.</li>
+        <li>Conçu un pipeline d'analyse dimensionnelle avec évaluation de précision ±200%, intégré dans une interface GUI.</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <p class="exp-title">Mémoire de fin d'études</p>
+          <p class="exp-company">ISET Bizerte</p>
+        </div>
+        <span class="exp-date">02/2025 – 06/2025</span>
+      </div>
+      <ul>
+        <li>Développé un robot mobile autonome de désherbage avec YOLOv8 et ROS2.</li>
+        <li>Simulé la navigation sous Gazebo (SLAM) et intégré les capteurs (caméra, GPS, LIDAR, IMU).</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <p class="exp-title">Stage de Fin d'Études</p>
+          <p class="exp-company">Tech Power Electronics Group</p>
+        </div>
+        <span class="exp-date">03/2023 – 05/2023</span>
+      </div>
+      <ul>
+        <li>Rénové et personnalisé la machine Charge-Lames pour toutes gammes de lames.</li>
+        <li>Automatisé en Ladder (TIA Portal/STEP7) augmentant la cadence de production.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-tag">// 03. projets</p>
+  <h2 class="section-title">Projets</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <h3>🦾 Bras Robotique 4DOF</h3>
+      <p>Conception et programmation du contrôle d'un bras robotique avec simulation dynamique sous MATLAB.</p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">MATLAB</span><span class="tag">Simscape</span></div>
+      <a href="https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB" class="project-link" target="_blank">→ github.com</a>
+    </div>
+    <div class="project-card">
+      <h3>🤖 Robot Mobile SLAM</h3>
+      <p>Conçu un robot mobile en 3D (SolidWorks/URDF) et implémenté le SLAM gmapping sous Gazebo.</p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">ROS2</span><span class="tag">Gazebo</span><span class="tag">SLAM</span></div>
+      <a href="https://github.com/ahmedriaahi/R_PX0-autonomous-robot" class="project-link" target="_blank">→ github.com</a>
+    </div>
+    <div class="project-card">
+      <h3>👁️ Reconnaissance Gestuelle</h3>
+      <p>Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel.</p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">OpenCV</span><span class="tag">Python</span></div>
+      <a href="https://lnkd.in/p/eQX7h6y6" class="project-link" target="_blank">→ voir démo</a>
+    </div>
+    <div class="project-card">
+      <h3>🎯 Reconnaissance Utilisateurs</h3>
+      <p>Capturé et traité des images en temps réel avec identification via TensorFlow, déployé avec Docker.</p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">TensorFlow</span><span class="tag">Docker</span></div>
+      <a href="https://github.com/ahmedriaahi/Real-Time-User-Recognition-" class="project-link" target="_blank">→ github.com</a>
+    </div>
+    <div class="project-card">
+      <h3>📏 Mesure ArUco</h3>
+      <p>Développé un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra.</p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">OpenCV</span><span class="tag">ArUco</span><span class="tag">Python</span></div>
+      <span style="color:var(--muted);font-size:0.8rem;font-family:'Fira Code',monospace">→ coming soon</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-tag">// 04. contact</p>
+  <h2 class="section-title">Me Contacter</h2>
+  <div class="contact-box">
+    <p>Disponible pour des stages de recherche et opportunités internationales (Mitacs Globalink).</p>
+    <div class="contact-links">
+      <a href="mailto:ahmed.riahi@esprit.tn" class="btn-primary">✉ Email</a>
+      <a href="https://linkedin.com/in/riahi-ahmed" class="btn-outline" target="_blank">LinkedIn</a>
+      <a href="https://github.com/ahmedriaahi" class="btn-outline" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Conçu & développé par Ahmed Riahi · 2026</p>
+</footer>
+
+</body>
+</html>
