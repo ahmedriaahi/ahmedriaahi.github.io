@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ahmed Riahi | Robotics & AI Engineer</title>
+  <meta name="description" content="Ahmed Riahi — Étudiant ingénieur en mécatronique spécialisé en robotique autonome, vision par ordinateur et IA embarquée.">
+  <meta name="keywords" content="Ahmed Riahi, Robotics, ROS2, Computer Vision, AI, SLAM, OpenCV, YOLOv8">
+  <meta property="og:title" content="Ahmed Riahi | Robotics & AI Engineer">
+  <meta property="og:description" content="Portfolio de Ahmed Riahi — Robotique autonome, Vision par ordinateur, IA embarquée">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --bg: #0a0a0f;
@@ -16,37 +22,90 @@
       --text: #e2e8f0;
       --muted: #64748b;
       --green: #10b981;
+      --card-hover: #1e1e2e;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --accent: #6366f1;
+      --accent2: #0891b2;
+      --text: #0f172a;
+      --muted: #64748b;
+      --green: #059669;
+      --card-hover: #f1f5f9;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; transition: background 0.3s, color 0.3s; }
+
+    /* SCROLL PROGRESS */
+    #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; z-index: 999; transition: width 0.1s; }
 
     /* NAV */
-    nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    nav { position: fixed; top: 3px; width: 100%; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    [data-theme="light"] nav { background: rgba(248,250,252,0.85); }
     .nav-logo { font-family: 'Fira Code', monospace; color: var(--accent2); font-size: 1rem; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent2); }
+    .nav-controls { display: flex; gap: 0.75rem; align-items: center; }
+    .ctrl-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; font-family: 'Fira Code', monospace; }
+    .ctrl-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* PARTICLES */
+    #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
     /* HERO */
-    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-    .hero-tag { font-family: 'Fira Code', monospace; color: var(--accent2); font-size: 0.875rem; margin-bottom: 1rem; }
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden; z-index: 1; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(99,102,241,0.15) 0%, transparent 60%); animation: pulse-bg 4s ease-in-out infinite; }
+    @keyframes pulse-bg { 0%,100%{opacity:0.6} 50%{opacity:1} }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin: 0 auto 1.5rem; display: block; box-shadow: 0 0 30px rgba(99,102,241,0.4); animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .status { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--green); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; }
+    .dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-tag { font-family: 'Fira Code', monospace; color: var(--accent2); font-size: 0.875rem; margin-bottom: 0.75rem; }
     .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
-    .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-sub { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+    .glitch { position: relative; display: inline-block; }
+    .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .glitch::before { color: #ff006e; animation: glitch1 3s infinite; clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%); }
+    .glitch::after { color: #00ffff; animation: glitch2 3s infinite; clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); }
+    @keyframes glitch1 { 0%,90%,100%{transform:translate(0)} 92%{transform:translate(-3px,1px)} 94%{transform:translate(3px,-1px)} 96%{transform:translate(-2px,2px)} }
+    @keyframes glitch2 { 0%,90%,100%{transform:translate(0)} 92%{transform:translate(3px,-1px)} 94%{transform:translate(-3px,1px)} 96%{transform:translate(2px,-2px)} }
+    .gradient-text { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .typewriter { color: var(--accent2); font-family: 'Fira Code', monospace; font-size: 1.1rem; margin-bottom: 1rem; min-height: 1.5rem; }
+    .cursor { display: inline-block; width: 2px; height: 1.1rem; background: var(--accent2); margin-left: 2px; animation: blink 1s infinite; vertical-align: middle; }
+    .hero-sub { color: var(--muted); font-size: 1rem; max-width: 550px; margin: 0 auto 2rem; }
     .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-primary { background: var(--accent); color: white; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: opacity 0.2s; }
-    .btn-primary:hover { opacity: 0.85; }
-    .btn-outline { border: 1px solid var(--border); color: var(--text); padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: border-color 0.2s; }
-    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
-    .status { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--green); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1.5rem; }
-    .dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.2s; }
+    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
 
     /* SECTIONS */
-    section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
+    section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
     .section-tag { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 0.8rem; margin-bottom: 0.5rem; }
     .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 3rem; }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* EDUCATION TIMELINE */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent2)); }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-dot { position: absolute; left: -2.4rem; top: 0.4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--accent2); box-shadow: 0 0 10px rgba(99,102,241,0.5); }
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; overflow: hidden; position: relative; transition: border-color 0.3s; }
+    .edu-card:hover { border-color: var(--accent); }
+    .edu-bg { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s; background-size: cover; background-position: center; filter: blur(2px) brightness(0.15); }
+    .edu-card:hover .edu-bg { opacity: 1; }
+    .edu-content { position: relative; z-index: 1; }
+    .edu-year { font-family: 'Fira Code', monospace; color: var(--accent2); font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .edu-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; }
+    .edu-school { color: var(--muted); font-size: 0.875rem; }
 
     /* SKILLS */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
@@ -54,197 +113,523 @@
     .skill-card:hover { border-color: var(--accent); }
     .skill-card h4 { color: var(--accent2); font-size: 0.8rem; font-family: 'Fira Code', monospace; margin-bottom: 0.75rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag { background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); color: var(--text); padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+    .tag { background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); color: var(--text); padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.75rem; transition: all 0.2s; cursor: default; }
+    .tag:hover { background: rgba(99,102,241,0.25); border-color: var(--accent2); color: var(--accent2); box-shadow: 0 0 8px rgba(34,211,238,0.3); }
 
     /* EXPERIENCE */
     .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
-    .exp-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 1.5rem; }
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, border-color 0.2s; }
+    .exp-card:hover { transform: translateX(4px); border-left-color: var(--accent2); }
     .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
     .exp-title { font-weight: 600; font-size: 1rem; }
     .exp-company { color: var(--accent2); font-size: 0.875rem; }
     .exp-date { color: var(--muted); font-size: 0.8rem; font-family: 'Fira Code', monospace; }
-    .exp-card ul { list-style: none; padding: 0; }
-    .exp-card ul li { color: var(--muted); font-size: 0.875rem; padding: 0.25rem 0; padding-left: 1rem; position: relative; }
+    .exp-card ul { list-style: none; }
+    .exp-card ul li { color: var(--muted); font-size: 0.875rem; padding: 0.25rem 0 0.25rem 1rem; position: relative; }
     .exp-card ul li::before { content: '▸'; color: var(--accent); position: absolute; left: 0; }
 
     /* PROJECTS */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
-    .project-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.3s; transform-style: preserve-3d; will-change: transform; }
+    .project-card:hover { border-color: var(--accent2); }
+    .proj-emoji { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
     .project-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
     .project-card p { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
-    .project-link { color: var(--accent2); font-size: 0.8rem; text-decoration: none; font-family: 'Fira Code', monospace; }
-    .project-link:hover { text-decoration: underline; }
+    .project-link { color: var(--accent2); font-size: 0.8rem; text-decoration: none; font-family: 'Fira Code', monospace; display: inline-block; margin-top: 0.5rem; transition: color 0.2s; }
+    .project-link:hover { color: var(--accent); }
 
     /* CONTACT */
     .contact-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 3rem; text-align: center; }
     .contact-box p { color: var(--muted); margin-bottom: 2rem; }
-    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .contact-icons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .contact-icon { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--muted); transition: all 0.2s; }
+    .contact-icon i { font-size: 2rem; padding: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; }
+    .contact-icon:hover { color: var(--accent2); }
+    .contact-icon:hover i { border-color: var(--accent2); box-shadow: 0 0 20px rgba(34,211,238,0.2); transform: translateY(-4px); }
+    .contact-icon span { font-size: 0.75rem; font-family: 'Fira Code', monospace; }
+
+    /* GITHUB STATS */
+    .stats-grid { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.5rem; text-align: center; min-width: 140px; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--accent2); font-family: 'Fira Code', monospace; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* CHATBOT */
+    #chatbot-btn { position: fixed; bottom: 5rem; right: 1.5rem; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; cursor: pointer; font-size: 1.3rem; box-shadow: 0 4px 20px rgba(99,102,241,0.4); z-index: 200; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; }
+    #chatbot-btn:hover { transform: scale(1.1); }
+    #chatbot { position: fixed; bottom: 9rem; right: 1.5rem; width: 300px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; z-index: 200; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.4); overflow: hidden; }
+    .chat-header { background: linear-gradient(135deg, var(--accent), var(--accent2)); padding: 0.875rem 1rem; color: white; font-size: 0.875rem; font-weight: 500; display: flex; justify-content: space-between; align-items: center; }
+    .chat-close { background: none; border: none; color: white; cursor: pointer; font-size: 1rem; }
+    .chat-messages { padding: 1rem; height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; }
+    .chat-msg { padding: 0.6rem 0.875rem; border-radius: 10px; font-size: 0.8rem; max-width: 85%; line-height: 1.4; }
+    .chat-msg.bot { background: var(--bg2); color: var(--text); align-self: flex-start; border: 1px solid var(--border); }
+    .chat-msg.user { background: var(--accent); color: white; align-self: flex-end; }
+    .chat-input-row { display: flex; gap: 0.5rem; padding: 0.75rem; border-top: 1px solid var(--border); }
+    .chat-input { flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 0.75rem; color: var(--text); font-size: 0.8rem; outline: none; }
+    .chat-input:focus { border-color: var(--accent2); }
+    .chat-send { background: var(--accent); border: none; color: white; border-radius: 8px; padding: 0.5rem 0.75rem; cursor: pointer; font-size: 0.8rem; transition: opacity 0.2s; }
+    .chat-send:hover { opacity: 0.85; }
+
+    /* BACK TO TOP */
+    #back-top { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); color: var(--text); cursor: pointer; font-size: 1rem; display: none; align-items: center; justify-content: center; z-index: 200; transition: all 0.2s; }
+    #back-top:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-3px); }
+    #back-top.show { display: flex; }
 
     /* FOOTER */
-    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+
+    /* LANG hidden */
+    [data-lang] { display: none; }
+    .lang-fr [data-lang="fr"], .lang-en [data-lang="en"] { display: inline; }
+    .lang-fr [data-lang-block="fr"], .lang-en [data-lang-block="en"] { display: block; }
+    body { --lang: fr; }
   </style>
 </head>
-<body>
+<body class="lang-fr">
 
+<div id="progress-bar"></div>
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
 <nav>
   <span class="nav-logo">~/ahmedriaahi</span>
   <ul class="nav-links">
+    <li><a href="#education"><span data-lang="fr">Éducation</span><span data-lang="en">Education</span></a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience"><span data-lang="fr">Expérience</span><span data-lang="en">Experience</span></a></li>
+    <li><a href="#projects"><span data-lang="fr">Projets</span><span data-lang="en">Projects</span></a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="nav-controls">
+    <button class="ctrl-btn" onclick="toggleLang()" id="lang-btn">EN</button>
+    <button class="ctrl-btn" onclick="toggleTheme()" id="theme-btn">☀️</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div>
-    <div class="status"><span class="dot"></span> Open to Research Internships</div>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <img src="https://avatars.githubusercontent.com/ahmedriaahi" alt="Ahmed Riahi" class="hero-photo">
+    <div class="status"><span class="dot"></span> <span data-lang="fr">Disponible — Stages de recherche</span><span data-lang="en">Available — Research Internships</span></div>
     <p class="hero-tag">// Robotics & AI Engineer</p>
-    <h1>Ahmed <span>Riahi</span></h1>
-    <p class="hero-sub">Étudiant ingénieur en mécatronique spécialisé en robotique autonome, vision par ordinateur et IA embarquée.</p>
+    <h1>
+      <span class="glitch" data-text="Ahmed Riahi">Ahmed </span><span class="gradient-text glitch" data-text="Riahi">Riahi</span>
+    </h1>
+    <div class="typewriter"><span id="typewriter-text"></span><span class="cursor"></span></div>
+    <p class="hero-sub">
+      <span data-lang="fr">Étudiant ingénieur en mécatronique spécialisé en robotique autonome, vision par ordinateur et IA embarquée.</span>
+      <span data-lang="en">Mechatronics engineering student specialized in autonomous robotics, computer vision and embedded AI.</span>
+    </p>
     <div class="hero-btns">
-      <a href="#projects" class="btn-primary">Voir mes projets</a>
-      <a href="#contact" class="btn-outline">Me contacter</a>
+      <a href="#projects" class="btn-primary"><span data-lang="fr">Voir mes projets</span><span data-lang="en">View my projects</span></a>
+      <a href="#contact" class="btn-outline"><span data-lang="fr">Me contacter</span><span data-lang="en">Contact me</span></a>
     </div>
   </div>
 </div>
 
+<!-- EDUCATION -->
+<section id="education" class="fade-in">
+  <p class="section-tag">// 01. <span data-lang="fr">formation</span><span data-lang="en">education</span></p>
+  <h2 class="section-title"><span data-lang="fr">Parcours Académique</span><span data-lang="en">Academic Background</span></h2>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="edu-card">
+        <div class="edu-bg" style="background-image: url('https://esprit.tn/wp-content/uploads/2022/01/esprit-campus.jpg')"></div>
+        <div class="edu-content">
+          <p class="edu-year">2025 — <span data-lang="fr">En cours</span><span data-lang="en">Ongoing</span></p>
+          <p class="edu-title"><span data-lang="fr">Cycle Ingénieur — Électromécanique, Spécialité Mécatronique</span><span data-lang="en">Engineering Cycle — Electromechanics, Mechatronics</span></p>
+          <p class="edu-school">ESPRIT — El Ghazella, Tunisie</p>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="edu-card">
+        <div class="edu-bg" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/ISET_Bizerte.jpg/640px-ISET_Bizerte.jpg')"></div>
+        <div class="edu-content">
+          <p class="edu-year">2023 — 2025</p>
+          <p class="edu-title"><span data-lang="fr">Master — Robotique Avancée et Intelligence Artificielle</span><span data-lang="en">Master — Advanced Robotics and Artificial Intelligence</span></p>
+          <p class="edu-school">ISET Bizerte, Tunisie</p>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="edu-card">
+        <div class="edu-content">
+          <p class="edu-year">2020 — 2023</p>
+          <p class="edu-title"><span data-lang="fr">Licence — Génie Électrique, Automatisme & Informatique Industrielle</span><span data-lang="en">Bachelor — Electrical Engineering, Industrial Automation</span></p>
+          <p class="edu-school">ISET Bizerte, Tunisie</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS -->
-<section id="skills">
-  <p class="section-tag">// 01. compétences</p>
+<section id="skills" class="fade-in">
+  <p class="section-tag">// 02. skills</p>
   <h2 class="section-title">Stack Technique</h2>
   <div class="skills-grid">
-    <div class="skill-card">
+    <div class="skill-card fade-in">
       <h4>Frameworks & Libs</h4>
       <div class="tags">
         <span class="tag">ROS2 Humble</span><span class="tag">ROS1 Noetic</span><span class="tag">OpenCV</span>
       </div>
     </div>
-    <div class="skill-card">
-      <h4>Interfaces & Outils</h4>
+    <div class="skill-card fade-in">
+      <h4>Interfaces & <span data-lang="fr">Outils</span><span data-lang="en">Tools</span></h4>
       <div class="tags">
         <span class="tag">Qt6</span><span class="tag">TIA Portal</span><span class="tag">Docker</span><span class="tag">VS Code</span>
       </div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card fade-in">
       <h4>Simulation & CAD</h4>
       <div class="tags">
         <span class="tag">Gazebo</span><span class="tag">RViz</span><span class="tag">Webots</span><span class="tag">SolidWorks</span><span class="tag">FreeCAD</span>
       </div>
     </div>
-    <div class="skill-card">
-      <h4>Domaines d'expertise</h4>
+    <div class="skill-card fade-in">
+      <h4><span data-lang="fr">Domaines d'expertise</span><span data-lang="en">Expertise</span></h4>
       <div class="tags">
-        <span class="tag">SLAM</span><span class="tag">Vision par ordinateur</span><span class="tag">Navigation autonome</span><span class="tag">IA embarquée</span>
+        <span class="tag">SLAM</span><span class="tag"><span data-lang="fr">Vision par ordinateur</span><span data-lang="en">Computer Vision</span></span><span class="tag"><span data-lang="fr">Navigation autonome</span><span data-lang="en">Autonomous Navigation</span></span><span class="tag">IA embarquée</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience">
-  <p class="section-tag">// 02. expérience</p>
-  <h2 class="section-title">Parcours Professionnel</h2>
+<section id="experience" class="fade-in">
+  <p class="section-tag">// 03. <span data-lang="fr">expérience</span><span data-lang="en">experience</span></p>
+  <h2 class="section-title"><span data-lang="fr">Parcours Professionnel</span><span data-lang="en">Professional Experience</span></h2>
   <div class="exp-list">
-    <div class="exp-card">
+    <div class="exp-card fade-in">
       <div class="exp-header">
         <div>
-          <p class="exp-title">Stage Ingénieur</p>
+          <p class="exp-title"><span data-lang="fr">Stage Ingénieur</span><span data-lang="en">Engineering Internship</span></p>
           <p class="exp-company">WEMAKER (Startup)</p>
         </div>
         <span class="exp-date">07/2026 – 08/2026</span>
       </div>
       <ul>
-        <li>Développé un système de calibration automatique post-production pour pièces imprimées 3D, augmentant le débit de 7 à 95 pièces/jour.</li>
-        <li>Conçu un pipeline d'analyse dimensionnelle avec évaluation de précision ±200%, intégré dans une interface GUI.</li>
+        <li><span data-lang="fr">Développé un système de calibration automatique post-production pour pièces imprimées 3D, augmentant le débit de 7 à 95 pièces/jour.</span><span data-lang="en">Developed an automatic post-production calibration system for 3D printed parts, increasing throughput from 7 to 95 parts/day.</span></li>
+        <li><span data-lang="fr">Conçu un pipeline d'analyse dimensionnelle avec évaluation de précision ±200%, intégré dans une interface GUI.</span><span data-lang="en">Designed a dimensional analysis pipeline with ±200% precision evaluation, integrated into a GUI interface.</span></li>
       </ul>
     </div>
-    <div class="exp-card">
+    <div class="exp-card fade-in">
       <div class="exp-header">
         <div>
-          <p class="exp-title">Mémoire de fin d'études</p>
+          <p class="exp-title"><span data-lang="fr">Mémoire de fin d'études</span><span data-lang="en">Final Year Thesis</span></p>
           <p class="exp-company">ISET Bizerte</p>
         </div>
         <span class="exp-date">02/2025 – 06/2025</span>
       </div>
       <ul>
-        <li>Développé un robot mobile autonome de désherbage avec YOLOv8 et ROS2.</li>
-        <li>Simulé la navigation sous Gazebo (SLAM) et intégré les capteurs (caméra, GPS, LIDAR, IMU).</li>
+        <li><span data-lang="fr">Développé un robot mobile autonome de désherbage avec YOLOv8 et ROS2.</span><span data-lang="en">Developed an autonomous weeding mobile robot using YOLOv8 and ROS2.</span></li>
+        <li><span data-lang="fr">Simulé la navigation sous Gazebo (SLAM) et intégré les capteurs (caméra, GPS, LIDAR, IMU).</span><span data-lang="en">Simulated navigation under Gazebo (SLAM) and integrated sensors (camera, GPS, LIDAR, IMU).</span></li>
       </ul>
     </div>
-    <div class="exp-card">
+    <div class="exp-card fade-in">
       <div class="exp-header">
         <div>
-          <p class="exp-title">Stage de Fin d'Études</p>
+          <p class="exp-title"><span data-lang="fr">Stage de Fin d'Études</span><span data-lang="en">Final Year Internship</span></p>
           <p class="exp-company">Tech Power Electronics Group</p>
         </div>
         <span class="exp-date">03/2023 – 05/2023</span>
       </div>
       <ul>
-        <li>Rénové et personnalisé la machine Charge-Lames pour toutes gammes de lames.</li>
-        <li>Automatisé en Ladder (TIA Portal/STEP7) augmentant la cadence de production.</li>
+        <li><span data-lang="fr">Rénové et personnalisé la machine Charge-Lames pour toutes gammes de lames, éliminant les temps de changement inter-gammes.</span><span data-lang="en">Renovated and customized the Charge-Lames machine for all blade ranges, eliminating inter-range changeover times.</span></li>
+        <li><span data-lang="fr">Automatisé en Ladder (TIA Portal/STEP7) augmentant la cadence de production de la ligne.</span><span data-lang="en">Automated in Ladder (TIA Portal/STEP7), increasing the production line throughput.</span></li>
       </ul>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects">
-  <p class="section-tag">// 03. projets</p>
-  <h2 class="section-title">Projets</h2>
+<section id="projects" class="fade-in">
+  <p class="section-tag">// 04. <span data-lang="fr">projets</span><span data-lang="en">projects</span></p>
+  <h2 class="section-title"><span data-lang="fr">Projets</span><span data-lang="en">Projects</span></h2>
   <div class="projects-grid">
-    <div class="project-card">
-      <h3>🦾 Bras Robotique 4DOF</h3>
-      <p>Conception et programmation du contrôle d'un bras robotique avec simulation dynamique sous MATLAB.</p>
-      <div class="tags" style="margin-bottom:1rem"><span class="tag">MATLAB</span><span class="tag">Simscape</span></div>
-      <a href="https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB" class="project-link" target="_blank">→ github.com</a>
+    <div class="project-card fade-in" id="tilt-1">
+      <span class="proj-emoji">🦾</span>
+      <h3><span data-lang="fr">Bras Robotique 4DOF</span><span data-lang="en">4DOF Robotic Arm</span></h3>
+      <p><span data-lang="fr">Conçu et programmé le contrôle d'un bras robotique avec simulation dynamique sous MATLAB/Simscape.</span><span data-lang="en">Designed and programmed control of a robotic arm with dynamic simulation under MATLAB/Simscape.</span></p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">MATLAB</span><span class="tag">Simscape</span><span class="tag">Robotics</span></div>
+      <a href="https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB" class="project-link" target="_blank">→ GitHub</a>
     </div>
-    <div class="project-card">
-      <h3>🤖 Robot Mobile SLAM</h3>
-      <p>Conçu un robot mobile en 3D (SolidWorks/URDF) et implémenté le SLAM gmapping sous Gazebo.</p>
-      <div class="tags" style="margin-bottom:1rem"><span class="tag">ROS2</span><span class="tag">Gazebo</span><span class="tag">SLAM</span></div>
-      <a href="https://github.com/ahmedriaahi/R_PX0-autonomous-robot" class="project-link" target="_blank">→ github.com</a>
+    <div class="project-card fade-in" id="tilt-2">
+      <span class="proj-emoji">🤖</span>
+      <h3><span data-lang="fr">Robot Mobile SLAM</span><span data-lang="en">SLAM Mobile Robot</span></h3>
+      <p><span data-lang="fr">Conçu un robot mobile en 3D (SolidWorks/URDF) et implémenté le SLAM gmapping sous Gazebo avec LIDAR virtuel.</span><span data-lang="en">Designed a 3D mobile robot (SolidWorks/URDF) and implemented SLAM gmapping under Gazebo with virtual LIDAR.</span></p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">ROS2</span><span class="tag">Gazebo</span><span class="tag">SLAM</span><span class="tag">SolidWorks</span></div>
+      <a href="https://github.com/ahmedriaahi/R_PX0-autonomous-robot" class="project-link" target="_blank">→ GitHub</a>
     </div>
-    <div class="project-card">
-      <h3>👁️ Reconnaissance Gestuelle</h3>
-      <p>Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel.</p>
-      <div class="tags" style="margin-bottom:1rem"><span class="tag">OpenCV</span><span class="tag">Python</span></div>
-      <a href="https://lnkd.in/p/eQX7h6y6" class="project-link" target="_blank">→ voir démo</a>
+    <div class="project-card fade-in" id="tilt-3">
+      <span class="proj-emoji">👁️</span>
+      <h3><span data-lang="fr">Reconnaissance Gestuelle</span><span data-lang="en">Gesture Recognition</span></h3>
+      <p><span data-lang="fr">Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel.</span><span data-lang="en">Developed a gesture recognition system to detect the number of raised fingers in real time.</span></p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">OpenCV</span><span class="tag">Python</span><span class="tag">Computer Vision</span></div>
+      <a href="https://lnkd.in/p/eQX7h6y6" class="project-link" target="_blank">→ <span data-lang="fr">Voir démo</span><span data-lang="en">See demo</span></a>
     </div>
-    <div class="project-card">
-      <h3>🎯 Reconnaissance Utilisateurs</h3>
-      <p>Capturé et traité des images en temps réel avec identification via TensorFlow, déployé avec Docker.</p>
-      <div class="tags" style="margin-bottom:1rem"><span class="tag">TensorFlow</span><span class="tag">Docker</span></div>
-      <a href="https://github.com/ahmedriaahi/Real-Time-User-Recognition-" class="project-link" target="_blank">→ github.com</a>
+    <div class="project-card fade-in" id="tilt-4">
+      <span class="proj-emoji">🎯</span>
+      <h3><span data-lang="fr">Reconnaissance Utilisateurs</span><span data-lang="en">User Recognition</span></h3>
+      <p><span data-lang="fr">Capturé et traité des images en temps réel avec identification via TensorFlow, déployé avec Docker.</span><span data-lang="en">Captured and processed real-time images with TensorFlow identification, deployed with Docker.</span></p>
+      <div class="tags" style="margin-bottom:1rem"><span class="tag">TensorFlow</span><span class="tag">Docker</span><span class="tag">Python</span></div>
+      <a href="https://github.com/ahmedriaahi/Real-Time-User-Recognition-" class="project-link" target="_blank">→ GitHub</a>
     </div>
-    <div class="project-card">
-      <h3>📏 Mesure ArUco</h3>
-      <p>Développé un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra.</p>
+    <div class="project-card fade-in" id="tilt-5">
+      <span class="proj-emoji">📏</span>
+      <h3><span data-lang="fr">Mesure Distance ArUco</span><span data-lang="en">ArUco Distance Measurement</span></h3>
+      <p><span data-lang="fr">Développé un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra intégrée.</span><span data-lang="en">Developed a real-time distance detection and estimation system using ArUco markers with integrated camera calibration.</span></p>
       <div class="tags" style="margin-bottom:1rem"><span class="tag">OpenCV</span><span class="tag">ArUco</span><span class="tag">Python</span></div>
       <span style="color:var(--muted);font-size:0.8rem;font-family:'Fira Code',monospace">→ coming soon</span>
     </div>
   </div>
 </section>
 
+<!-- GITHUB STATS -->
+<section class="fade-in" style="text-align:center">
+  <p class="section-tag">// 05. github stats</p>
+  <h2 class="section-title">Live GitHub Stats</h2>
+  <div class="stats-grid" id="gh-stats">
+    <div class="stat-card"><div class="stat-value" id="gh-repos">—</div><div class="stat-label">Repositories</div></div>
+    <div class="stat-card"><div class="stat-value" id="gh-followers">—</div><div class="stat-label">Followers</div></div>
+    <div class="stat-card"><div class="stat-value" id="gh-following">—</div><div class="stat-label">Following</div></div>
+    <div class="stat-card"><div class="stat-value" id="gh-stars">—</div><div class="stat-label">Total Stars</div></div>
+  </div>
+</section>
+
 <!-- CONTACT -->
-<section id="contact">
-  <p class="section-tag">// 04. contact</p>
-  <h2 class="section-title">Me Contacter</h2>
+<section id="contact" class="fade-in">
+  <p class="section-tag">// 06. contact</p>
+  <h2 class="section-title"><span data-lang="fr">Me Contacter</span><span data-lang="en">Get in Touch</span></h2>
   <div class="contact-box">
-    <p>Disponible pour des stages de recherche et opportunités internationales (Mitacs Globalink).</p>
-    <div class="contact-links">
-      <a href="mailto:ahmed.riahi@esprit.tn" class="btn-primary">✉ Email</a>
-      <a href="https://linkedin.com/in/riahi-ahmed" class="btn-outline" target="_blank">LinkedIn</a>
-      <a href="https://github.com/ahmedriaahi" class="btn-outline" target="_blank">GitHub</a>
+    <p><span data-lang="fr">Disponible pour des stages de recherche et opportunités internationales (Mitacs Globalink).</span><span data-lang="en">Available for research internships and international opportunities (Mitacs Globalink).</span></p>
+    <div class="contact-icons">
+      <a href="mailto:ahmed.riahi@esprit.tn" class="contact-icon">
+        <i class="fas fa-envelope"></i><span>Email</span>
+      </a>
+      <a href="https://linkedin.com/in/riahi-ahmed" class="contact-icon" target="_blank">
+        <i class="fab fa-linkedin"></i><span>LinkedIn</span>
+      </a>
+      <a href="https://github.com/ahmedriaahi" class="contact-icon" target="_blank">
+        <i class="fab fa-github"></i><span>GitHub</span>
+      </a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Conçu & développé par Ahmed Riahi · 2026</p>
+  <p><span data-lang="fr">Conçu & développé par</span><span data-lang="en">Designed & built by</span> <span style="color:var(--accent2)">Ahmed Riahi</span> · 2026</p>
 </footer>
 
+<!-- CHATBOT -->
+<button id="chatbot-btn" onclick="toggleChat()" title="Ask about Ahmed">🤖</button>
+<div id="chatbot">
+  <div class="chat-header">
+    <span>🤖 Ask about Ahmed</span>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg bot">Hi! I'm Ahmed's AI assistant. Ask me anything about his skills, projects or experience! 👋</div>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" placeholder="Ask something..." onkeypress="if(event.key==='Enter')sendMsg()">
+    <button class="chat-send" onclick="sendMsg()">→</button>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// === PARTICLES ===
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
+    size: Math.random() * 2 + 0.5,
+    alpha: Math.random() * 0.4 + 0.1
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    if (mouse.x) {
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 120) { p.vx -= dx * 0.0003; p.vy -= dy * 0.0003; }
+    }
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(99,102,241,${p.alpha})`;
+    ctx.fill();
+  });
+  // lines
+  particles.forEach((p, i) => {
+    particles.slice(i+1).forEach(p2 => {
+      const dx = p.x-p2.x, dy = p.y-p2.y;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if (dist < 100) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(99,102,241,${0.12*(1-dist/100)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// === SCROLL PROGRESS ===
+window.addEventListener('scroll', () => {
+  const p = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progress-bar').style.width = p + '%';
+  const btn = document.getElementById('back-top');
+  window.scrollY > 400 ? btn.classList.add('show') : btn.classList.remove('show');
+});
+
+// === FADE IN ===
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// === TYPEWRITER ===
+const phrases = ['Robotics Engineer', 'Computer Vision Dev', 'ROS2 Specialist', 'AI Enthusiast', 'Autonomous Systems'];
+let pi = 0, ci = 0, del = false;
+function typeWriter() {
+  const el = document.getElementById('typewriter-text');
+  const phrase = phrases[pi];
+  if (!del) {
+    el.textContent = phrase.substring(0, ci+1);
+    ci++;
+    if (ci === phrase.length) { del = true; setTimeout(typeWriter, 1800); return; }
+  } else {
+    el.textContent = phrase.substring(0, ci-1);
+    ci--;
+    if (ci === 0) { del = false; pi = (pi+1) % phrases.length; }
+  }
+  setTimeout(typeWriter, del ? 60 : 100);
+}
+typeWriter();
+
+// === 3D TILT ===
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    card.style.transform = `perspective(600px) rotateY(${x/20}deg) rotateX(${-y/20}deg) scale(1.03)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = 'none'; });
+});
+
+// === THEME ===
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
+}
+
+// === LANG ===
+let currentLang = 'fr';
+function toggleLang() {
+  currentLang = currentLang === 'fr' ? 'en' : 'fr';
+  document.body.className = document.body.className.replace(/lang-\w+/, '') + ' lang-' + currentLang;
+  document.getElementById('lang-btn').textContent = currentLang === 'fr' ? 'EN' : 'FR';
+}
+
+// === GITHUB STATS ===
+async function loadGHStats() {
+  try {
+    const r = await fetch('https://api.github.com/users/ahmedriaahi');
+    const d = await r.json();
+    document.getElementById('gh-repos').textContent = d.public_repos || '—';
+    document.getElementById('gh-followers').textContent = d.followers || '—';
+    document.getElementById('gh-following').textContent = d.following || '—';
+    // Stars
+    const repos = await fetch('https://api.github.com/users/ahmedriaahi/repos?per_page=100');
+    const rd = await repos.json();
+    const stars = rd.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+    document.getElementById('gh-stars').textContent = stars;
+  } catch(e) {}
+}
+loadGHStats();
+
+// === CHATBOT ===
+const knowledge = {
+  'skill': 'Ahmed masters ROS2, OpenCV, Python, C++, MATLAB, Qt6, Docker, Gazebo, SolidWorks and more!',
+  'compétence': 'Ahmed maîtrise ROS2, OpenCV, Python, C++, MATLAB, Qt6, Docker, Gazebo, SolidWorks et plus encore!',
+  'project': 'Ahmed has 5 major projects: 4DOF Robotic Arm, SLAM Robot, Gesture Recognition, User Recognition, and ArUco Distance Measurement.',
+  'projet': "Ahmed a 5 projets majeurs: Bras Robotique 4DOF, Robot SLAM, Reconnaissance Gestuelle, Reconnaissance Utilisateurs, et Mesure ArUco.",
+  'contact': 'You can reach Ahmed at ahmed.riahi@esprit.tn or on LinkedIn: linkedin.com/in/riahi-ahmed',
+  'email': 'Ahmed\'s email: ahmed.riahi@esprit.tn',
+  'experience': 'Ahmed did an internship at WEMAKER (2026) increasing production from 7 to 95 parts/day using computer vision!',
+  'stage': 'Ahmed a fait un stage chez WEMAKER (2026) augmentant la production de 7 à 95 pièces/jour grâce à la vision par ordinateur!',
+  'education': 'Ahmed is currently studying Engineering at ESPRIT (Mechatronics). He also holds a Master in Advanced Robotics & AI from ISET Bizerte.',
+  'formation': "Ahmed étudie actuellement l'ingénierie à l'ESPRIT (Mécatronique). Il a aussi un Master en Robotique Avancée & IA de l'ISET Bizerte.",
+  'ros': 'Ahmed works with both ROS1 (Noetic) and ROS2 (Humble) for autonomous robot development.',
+  'mitacs': 'Ahmed is looking for Mitacs Globalink research internship opportunities in robotics, computer vision or autonomous navigation.',
+};
+function toggleChat() {
+  const c = document.getElementById('chatbot');
+  c.style.display = c.style.display === 'flex' ? 'none' : 'flex';
+}
+function sendMsg() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  addMsg(msg, 'user');
+  input.value = '';
+  setTimeout(() => {
+    const lower = msg.toLowerCase();
+    let reply = "I'm not sure about that. Try asking about Ahmed's skills, projects, experience or contact info!";
+    for (const [key, val] of Object.entries(knowledge)) {
+      if (lower.includes(key)) { reply = val; break; }
+    }
+    addMsg(reply, 'bot');
+  }, 600);
+}
+function addMsg(text, type) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// === EASTER EGG ===
+console.log('%c🤖 Ahmed Riahi — Portfolio', 'color:#6366f1;font-size:20px;font-weight:bold');
+console.log('%cYou found the easter egg! 🎉', 'color:#22d3ee;font-size:14px');
+console.log('%cLooking for a talented robotics engineer? Contact: ahmed.riahi@esprit.tn', 'color:#10b981;font-size:12px');
+</script>
 </body>
 </html>
