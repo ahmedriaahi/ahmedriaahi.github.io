@@ -425,9 +425,12 @@
     </div>
 
     <div class="project-card fade-in" onclick="openModal('aruco')">
-      <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#0f2027,#203a43)">
-        <span style="font-size:3rem">📏</span>
-      </div>
+      <video class="project-thumb-video" muted loop playsinline
+        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <source src="https://github.com/ahmedriaahi/ahmedriaahi.github.io/blob/main/assets/VID_20260630_123937_1.mp4" type="video/mp4">
+      </video>
+      <div class="project-thumb-placeholder" style="display:none">📏</div>
       <div class="project-body">
         <h3><span data-lang="fr">Mesure Distance ArUco</span><span data-lang="en">ArUco Distance Measurement</span></h3>
         <p><span data-lang="fr">Détection et estimation de distance par marqueurs ArUco.</span><span data-lang="en">Distance estimation using ArUco markers.</span></p>
