@@ -32,6 +32,7 @@
 
     /* HERO */
     .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 4rem 4rem;position:relative;overflow:hidden;z-index:1;gap:4rem;}
+    @media(max-width:480px){.hero{min-height:100svh;}}
     .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(99,102,241,0.12) 0%,transparent 60%);animation:pulse-bg 4s ease-in-out infinite;}
     @keyframes pulse-bg{0%,100%{opacity:0.6}50%{opacity:1}}
     .hero-left{flex:0 0 300px;position:relative;z-index:2;}
@@ -63,6 +64,7 @@
 
     .fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
     .fade-in.visible{opacity:1;transform:translateY(0);}
+    @media(max-width:900px){.fade-in{opacity:1 !important;transform:none !important;}}
 
     /* TIMELINE */
     .timeline{position:relative;padding:1rem 0;}
@@ -174,14 +176,25 @@
     .lang-fr [data-lang="fr"],.lang-en [data-lang="en"]{display:inline;}
 
     @media(max-width:768px){
-      .hero{flex-direction:column;padding:6rem 1.5rem 3rem;text-align:center;gap:2rem;}
-      .hero-left{flex:none;}
-      .hero-photo{width:200px;height:250px;margin:0 auto;}
+      .hero{flex-direction:column;padding:5rem 1.5rem 3rem;text-align:center;gap:1.5rem;min-height:auto;}
+      .hero-left{flex:none;display:flex;justify-content:center;}
+      .hero-photo{width:160px;height:200px;margin:0 auto;}
+      .hero-right{width:100%;}
+      .hero-sub{max-width:100%;}
       .hero-btns{justify-content:center;}
+      .hero h1{font-size:2.2rem;}
       .timeline::before{left:1rem;}
       .timeline-item,.timeline-item:nth-child(even){padding:0 0 0 3rem;justify-content:flex-start;}
       .timeline-dot{left:1rem;}
       .nav-links{display:none;}
+      section{padding:3rem 1rem;}
+      .section-title{font-size:1.5rem;}
+      .skills-icons{gap:0.75rem;}
+      .skill-icon{min-width:60px;padding:0.6rem 0.75rem;}
+      .projects-grid{grid-template-columns:1fr;}
+      .contact-icons{gap:1rem;}
+      .modal{max-height:95vh;}
+      #chatbot{width:260px;right:0.75rem;}
     }
   </style>
 </head>
@@ -207,10 +220,11 @@
 
 <div class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-left fade-in">
-    <img src="assets/photo.jpg" alt="Ahmed Riahi" class="hero-photo" onerror="this.src='https://avatars.githubusercontent.com/ahmedriaahi'">
+  <div class="hero-left">
+    <img src="assets/photo.jpg" alt="Ahmed Riahi" class="hero-photo" 
+      onerror="this.src='https://avatars.githubusercontent.com/u/ahmedriaahi?v=4';this.onerror=null;">
   </div>
-  <div class="hero-right fade-in">
+  <div class="hero-right">
     <div class="status"><span class="dot"></span><span data-lang="fr">Disponible — Stages de recherche</span><span data-lang="en">Available — Research Internships</span></div>
     <p class="hero-tag">Robotics & AI Engineer</p>
     <h1><span class="glitch" data-text="Ahmed Riahi">Ahmed Riahi</span></h1>
@@ -249,4 +263,467 @@
         <div class="edu-bg" style="background-image:url('assets/iset.jpg')"></div>
         <div class="edu-content">
           <p class="edu-year">2023 — 2025</p>
-          <p class="edu-title"><span data-lang="fr">Master — Robotique Avancée & Intelligence Artificielle</span><span data-lang="en">Master — Adva
+          <p class="edu-title"><span data-lang="fr">Master — Robotique Avancée & Intelligence Artificielle</span><span data-lang="en">Master — Advanced Robotics & Artificial Intelligence</span></p>
+          <p class="edu-school">ISET Bizerte, Tunisie</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="edu-card">
+        <div class="edu-bg" style="background-image:url('assets/iset.jpg')"></div>
+        <div class="edu-content">
+          <p class="edu-year">2020 — 2023</p>
+          <p class="edu-title"><span data-lang="fr">Licence — Génie Électrique, Automatisme & Informatique Industrielle</span><span data-lang="en">Bachelor — Electrical Engineering & Industrial Automation</span></p>
+          <p class="edu-school">ISET Bizerte, Tunisie</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="edu-card">
+        <div class="edu-bg" style="background-image:url('assets/lycee.jpg')"></div>
+        <div class="edu-content">
+          <p class="edu-year">2019 — 2020</p>
+          <p class="edu-title"><span data-lang="fr">Baccalauréat Mathématiques</span><span data-lang="en">High School Diploma — Mathematics</span></p>
+          <p class="edu-school">Bizerte, Tunisie</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="section-title fade-in">Stack Technique</h2>
+  <div class="skills-categories">
+    <div class="skill-category fade-in">
+      <h4>Frameworks & Libs</h4>
+      <div class="skills-icons">
+        <div class="skill-icon"><img src="assets/ros.png" alt="ROS"><span>ROS2</span></div>
+        <div class="skill-icon"><i class="devicon-opencv-plain colored"></i><span>OpenCV</span></div>
+        <div class="skill-icon"><i class="devicon-tensorflow-original colored"></i><span>TensorFlow</span></div>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <h4><span data-lang="fr">Langages</span><span data-lang="en">Languages</span></h4>
+      <div class="skills-icons">
+        <div class="skill-icon"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+        <div class="skill-icon"><i class="devicon-cplusplus-plain colored"></i><span>C++</span></div>
+        <div class="skill-icon"><i class="devicon-matlab-plain colored"></i><span>MATLAB</span></div>
+        <div class="skill-icon"><i class="devicon-c-plain colored"></i><span>C</span></div>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <h4><span data-lang="fr">Outils & Interfaces</span><span data-lang="en">Tools & Interfaces</span></h4>
+      <div class="skills-icons">
+        <div class="skill-icon"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+        <div class="skill-icon"><i class="devicon-qt-original colored"></i><span>Qt6</span></div>
+        <div class="skill-icon"><i class="devicon-vscode-plain colored"></i><span>VS Code</span></div>
+        <div class="skill-icon"><i class="devicon-github-original colored"></i><span>GitHub</span></div>
+        <div class="skill-icon"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <h4>Simulation & CAD</h4>
+      <div class="skills-icons">
+        <div class="skill-icon"><img src="assets/sw.png" alt="SolidWorks"><span>SolidWorks</span></div>
+        <div class="skill-icon"><span style="font-size:1.8rem">⚙️</span><span>Gazebo</span></div>
+        <div class="skill-icon"><span style="font-size:1.8rem">🤖</span><span>RViz</span></div>
+        <div class="skill-icon"><span style="font-size:1.8rem">🌐</span><span>Webots</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <h2 class="section-title fade-in"><span data-lang="fr">Expérience Professionnelle</span><span data-lang="en">Professional Experience</span></h2>
+  <div class="exp-list">
+
+    <div class="exp-card fade-in" onclick="openModal('wemaker')">
+      <div class="exp-header">
+        <div>
+          <p class="exp-title"><span data-lang="fr">Stage Ingénieur</span><span data-lang="en">Engineering Internship</span></p>
+          <p class="exp-company">WEMAKER (Startup)</p>
+        </div>
+        <span class="exp-date">07/2026 – 08/2026</span>
+      </div>
+      <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
+    </div>
+
+    <div class="exp-card fade-in" onclick="openModal('iset')">
+      <div class="exp-header">
+        <div>
+          <p class="exp-title"><span data-lang="fr">Mémoire de fin d'études</span><span data-lang="en">Final Year Thesis</span></p>
+          <p class="exp-company">ISET Bizerte</p>
+        </div>
+        <span class="exp-date">02/2025 – 06/2025</span>
+      </div>
+      <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
+    </div>
+
+    <div class="exp-card fade-in" onclick="openModal('techpower')">
+      <div class="exp-header">
+        <div>
+          <p class="exp-title"><span data-lang="fr">Stage de Fin d'Études</span><span data-lang="en">Final Year Internship</span></p>
+          <p class="exp-company">Tech Power Electronics Group</p>
+        </div>
+        <span class="exp-date">03/2023 – 05/2023</span>
+      </div>
+      <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
+    </div>
+
+    <div class="exp-card fade-in" onclick="openModal('techpower2')">
+      <div class="exp-header">
+        <div>
+          <p class="exp-title"><span data-lang="fr">Stage de Perfectionnement</span><span data-lang="en">Improvement Internship</span></p>
+          <p class="exp-company">Tech Power Electronics Group</p>
+        </div>
+        <span class="exp-date">01/2022 – 02/2022</span>
+      </div>
+      <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2 class="section-title fade-in"><span data-lang="fr">Projets</span><span data-lang="en">Projects</span></h2>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in" onclick="openModal('arm')">
+      <video class="project-thumb-video" muted loop playsinline
+        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <source src="https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB/raw/main/Simulation/VID_20260519_151532.mp4" type="video/mp4">
+      </video>
+      <div class="project-thumb-placeholder" style="display:none">🦾</div>
+      <div class="project-body">
+        <h3><span data-lang="fr">Bras Robotique 4DOF</span><span data-lang="en">4DOF Robotic Arm</span></h3>
+        <p><span data-lang="fr">Contrôle et simulation dynamique sous MATLAB/Simscape.</span><span data-lang="en">Control and dynamic simulation under MATLAB/Simscape.</span></p>
+        <div class="tags"><span class="tag">MATLAB</span><span class="tag">Simscape</span></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('slam')">
+      <img src="assets/slam1.png" alt="Robot SLAM" class="project-thumb" onerror="this.style.display='none'">
+      <div class="project-body">
+        <h3>Robot Mobile SLAM</h3>
+        <p><span data-lang="fr">Navigation autonome avec SLAM gmapping sous Gazebo/RViz.</span><span data-lang="en">Autonomous navigation with SLAM gmapping under Gazebo/RViz.</span></p>
+        <div class="tags"><span class="tag">ROS2</span><span class="tag">Gazebo</span><span class="tag">SLAM</span></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('gesture')">
+      <img src="assets/geste.jpg" alt="Reconnaissance Gestuelle" class="project-thumb" onerror="this.style.display='none'">
+      <div class="project-body">
+        <h3><span data-lang="fr">Reconnaissance Gestuelle</span><span data-lang="en">Gesture Recognition</span></h3>
+        <p><span data-lang="fr">Détection des doigts en temps réel par vision artificielle.</span><span data-lang="en">Real-time finger detection using computer vision.</span></p>
+        <div class="tags"><span class="tag">OpenCV</span><span class="tag">Python</span></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('user')">
+      <img src="assets/user1.png" alt="User Recognition" class="project-thumb" onerror="this.style.display='none'">
+      <div class="project-body">
+        <h3><span data-lang="fr">Reconnaissance Utilisateurs</span><span data-lang="en">User Recognition</span></h3>
+        <p><span data-lang="fr">Identification en temps réel via TensorFlow et Docker.</span><span data-lang="en">Real-time identification via TensorFlow and Docker.</span></p>
+        <div class="tags"><span class="tag">TensorFlow</span><span class="tag">Docker</span></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('aruco')">
+      <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#0f2027,#203a43)">
+        <span style="font-size:3rem">📏</span>
+      </div>
+      <div class="project-body">
+        <h3><span data-lang="fr">Mesure Distance ArUco</span><span data-lang="en">ArUco Distance Measurement</span></h3>
+        <p><span data-lang="fr">Détection et estimation de distance par marqueurs ArUco.</span><span data-lang="en">Distance estimation using ArUco markers.</span></p>
+        <div class="tags"><span class="tag">OpenCV</span><span class="tag">ArUco</span><span class="tag">Python</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GITHUB STATS -->
+<section style="text-align:center">
+  <h2 class="section-title fade-in">GitHub Stats</h2>
+  <div class="stats-grid">
+    <div class="stat-card fade-in"><div class="stat-value" id="gh-repos">—</div><div class="stat-label">Repositories</div></div>
+    <div class="stat-card fade-in"><div class="stat-value" id="gh-followers">—</div><div class="stat-label">Followers</div></div>
+    <div class="stat-card fade-in"><div class="stat-value" id="gh-following">—</div><div class="stat-label">Following</div></div>
+    <div class="stat-card fade-in"><div class="stat-value" id="gh-stars">—</div><div class="stat-label">Stars</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title fade-in"><span data-lang="fr">Me Contacter</span><span data-lang="en">Get in Touch</span></h2>
+  <div class="contact-box fade-in">
+    <p><span data-lang="fr">Disponible pour des stages de recherche et opportunités internationales.</span><span data-lang="en">Available for research internships and international opportunities.</span></p>
+    <div class="contact-icons">
+      <a href="mailto:ahmed.riahi@esprit.tn" class="contact-icon">
+        <i class="fas fa-envelope" style="color:#6366f1"></i><span>Email</span>
+      </a>
+      <a href="https://linkedin.com/in/riahi-ahmed" class="contact-icon" target="_blank">
+        <i class="fab fa-linkedin" style="color:#0077b5"></i><span>LinkedIn</span>
+      </a>
+      <a href="https://github.com/ahmedriaahi" class="contact-icon" target="_blank">
+        <i class="fab fa-github"></i><span>GitHub</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer><p><span data-lang="fr">Conçu & développé par</span><span data-lang="en">Designed & built by</span> <span style="color:var(--accent2)">Ahmed Riahi</span> · 2026</p></footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-title"></h2>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-gallery" id="modal-gallery"></div>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-links" id="modal-links"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<button id="chatbot-btn" onclick="toggleChat()">🤖</button>
+<div id="chatbot">
+  <div class="chat-header"><span>🤖 Ask about Ahmed</span><button class="chat-close" onclick="toggleChat()">✕</button></div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg bot">Hi! Ask me anything about Ahmed's skills, projects or experience! 👋</div>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" placeholder="Ask something..." onkeypress="if(event.key==='Enter')sendMsg()">
+    <button class="chat-send" onclick="sendMsg()">→</button>
+  </div>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// MODAL DATA
+const modals = {
+  wemaker:{
+    title:'Stage Ingénieur — WEMAKER (Startup)',
+    gallery:[`<img src="assets/wemaker1.jpeg" alt="WeMake Lab">`],
+    desc:`Développé un système de calibration automatique post-production pour pièces imprimées 3D, augmentant le débit de 7 à 95 pièces/jour (+1257%). Conçu un pipeline d'analyse dimensionnelle avec évaluation de précision ±200%, intégré dans une interface GUI Qt6/Python. Utilisation de marqueurs ArUco pour la calibration automatique de la caméra.`,
+    tags:['OpenCV','Qt6','Python','ArUco','Computer Vision','3D Printing'],
+    links:[]
+  },
+  iset:{
+    title:'Mémoire de fin d\'études — ISET Bizerte',
+    gallery:[
+      `<img src="assets/iset1.jpg" alt="Simulation Gazebo">`,
+      `<img src="assets/iset2.png" alt="Robot navigation">`,
+      `<img src="assets/iset3.png" alt="YOLOv8">`,
+      `<img src="assets/iset4.png" alt="Robot désherbage">`
+    ],
+    desc:`Développé un robot mobile autonome de désherbage combinant détection temps réel (YOLOv8) et navigation SLAM sous ROS2/Gazebo avec intégration multi-capteurs (LIDAR, GPS, IMU, caméra). Le robot détecte les mauvaises herbes et navigue de façon autonome dans l'environnement simulé.`,
+    tags:['ROS2','YOLOv8','Gazebo','SLAM','LIDAR','GPS','IMU','Python'],
+    links:[]
+  },
+  techpower:{
+    title:'Stage de Fin d\'Études — Tech Power Electronics Group',
+    gallery:[`<img src="assets/techpower1.png" alt="Machine Siemens">`],
+    desc:`Rénovation et personnalisation de la machine Charge-Lames pour toutes gammes de lames, éliminant les temps de changement inter-gammes. Automatisation en Ladder (TIA Portal/STEP7) augmentant la cadence de production de la ligne. Programmation sur automate Siemens S7 avec interface HMI KTP600.`,
+    tags:['TIA Portal','STEP7','Ladder','Siemens S7','HMI','Automatisation'],
+    links:[]
+  },
+  techpower2:{
+    title:'Stage de Perfectionnement — Tech Power Electronics Group',
+    gallery:[`<img src="assets/techpower1.png" alt="Machine Soudure">`],
+    desc:`Étude et analyse fonctionnelle de la machine Soudure-de-Lames. Programmation du cycle de fonctionnement en Ladder pour une efficacité optimale. Optimisation du cycle automatisé avec gain de temps de production significatif.`,
+    tags:['Ladder','Siemens','Automatisation','Analyse fonctionnelle'],
+    links:[]
+  },
+  arm:{
+    title:'Bras Robotique 4DOF — MATLAB/Simscape',
+    gallery:[`<video controls src="https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB/raw/main/Simulation/VID_20260519_151532.mp4"></video>`],
+    desc:`Conception et programmation du contrôle d'un bras robotique 4 degrés de liberté. Simulation dynamique et analyse des mouvements sous MATLAB/Simscape. Modélisation cinématique directe et inverse du bras robotique.`,
+    tags:['MATLAB','Simscape','Robotics','Kinematics','Control Systems'],
+    links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB'}]
+  },
+  slam:{
+    title:'Robot Mobile Autonome — SLAM',
+    gallery:[
+      `<img src="assets/slam1.png" alt="Robot R.PX0 SolidWorks">`,
+      `<img src="assets/slam2.png" alt="Navigation RViz SLAM">`
+    ],
+    desc:`Conception du robot mobile R.PX0 en 3D sous SolidWorks exporté en URDF. Implémentation du SLAM gmapping pour la génération de cartes 2D et la navigation autonome sous Gazebo avec LIDAR virtuel.`,
+    tags:['ROS2','Gazebo','RViz','SLAM','SolidWorks','URDF','LIDAR'],
+    links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/R_PX0-autonomous-robot'}]
+  },
+  gesture:{
+    title:'Reconnaissance Gestuelle par Vision Artificielle',
+    gallery:[`<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7298771712739803136" allowfullscreen></iframe>`],
+    desc:`Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel par vision artificielle. Utilisation d'OpenCV pour le traitement d'image et la détection des contours de la main.`,
+    tags:['OpenCV','Python','Computer Vision','Real-time','MediaPipe'],
+    links:[{label:'→ Voir démo LinkedIn',url:'https://www.linkedin.com/feed/update/urn:li:activity:7298771712739803136'}]
+  },
+  user:{
+    title:'Système de Reconnaissance d\'Utilisateurs',
+    gallery:[
+      `<img src="assets/user1.png" alt="Ahmed 92.26%">`,
+      `<img src="assets/user2.png" alt="Messi 100%">`
+    ],
+    desc:`Capturé et traité des images en temps réel avec identification via TensorFlow (Ahmed: 92.26%, Messi: 100%). Déploiement conteneurisé avec Docker pour assurer la portabilité du système sur tous les environnements.`,
+    tags:['TensorFlow','OpenCV','Docker','Python','Deep Learning','CNN'],
+    links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/Real-Time-User-Recognition-'}]
+  },
+  aruco:{
+    title:'Système de Mesure de Distance — ArUco',
+    gallery:[],
+    desc:`Développement d'un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra intégrée. Conception d'une interface modulaire temps réel basée sur une architecture de traitement de frames. 🚧 Projet en cours — images coming soon.`,
+    tags:['OpenCV','ArUco','Python','Camera Calibration','Real-time'],
+    links:[]
+  }
+};
+
+function openModal(id){
+  const d=modals[id];
+  document.getElementById('modal-title').textContent=d.title;
+  document.getElementById('modal-gallery').innerHTML=d.gallery.length?d.gallery.join(''):'<p style="color:var(--muted);font-size:0.85rem;padding:1rem">🚧 Images coming soon</p>';
+  document.getElementById('modal-desc').textContent=d.desc;
+  document.getElementById('modal-tags').innerHTML=d.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('modal-links').innerHTML=d.links.map(l=>`<a href="${l.url}" class="modal-link" target="_blank">${l.label}</a>`).join('');
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// PARTICLES
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let mouse={x:null,y:null};
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+const pts=[];
+const isMobile=window.innerWidth<768;
+for(let i=0;i<(isMobile?25:60);i++)pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,size:Math.random()*2+.5,alpha:Math.random()*.4+.1});
+function animPts(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p=>{
+    if(mouse.x){const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){p.vx-=dx*.0003;p.vy-=dy*.0003;}}
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width)p.vx*=-1;
+    if(p.y<0||p.y>canvas.height)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle=`rgba(99,102,241,${p.alpha})`;ctx.fill();
+  });
+  pts.forEach((p,i)=>pts.slice(i+1).forEach(p2=>{
+    const dx=p.x-p2.x,dy=p.y-p2.y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(99,102,241,${.12*(1-d/100)})`;ctx.lineWidth=.5;ctx.stroke();}
+  }));
+  requestAnimationFrame(animPts);
+}
+animPts();
+
+// SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('progress-bar').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  const b=document.getElementById('back-top');
+  window.scrollY>400?b.classList.add('show'):b.classList.remove('show');
+});
+
+// FADE IN
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// TYPEWRITER
+const phrases=['Robotics Engineer','Computer Vision Dev','ROS2 Specialist','AI Enthusiast','Autonomous Systems Dev'];
+let pi=0,ci=0,del=false;
+function tw(){
+  const el=document.getElementById('typewriter-text'),ph=phrases[pi];
+  if(!del){el.textContent=ph.substring(0,ci+1);ci++;if(ci===ph.length){del=true;setTimeout(tw,1800);return;}}
+  else{el.textContent=ph.substring(0,ci-1);ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(tw,del?60:100);
+}
+tw();
+
+// 3D TILT
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
+    card.style.transform=`perspective(600px) rotateY(${x/20}deg) rotateX(${-y/20}deg) scale(1.03)`;
+  });
+  card.addEventListener('mouseleave',()=>{card.style.transform='none';});
+});
+
+// THEME & LANG
+function toggleTheme(){
+  const d=document.documentElement,isDark=d.getAttribute('data-theme')==='dark';
+  d.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('theme-btn').textContent=isDark?'🌙':'☀️';
+}
+let lang='fr';
+function toggleLang(){
+  lang=lang==='fr'?'en':'fr';
+  document.body.className=document.body.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.getElementById('lang-btn').textContent=lang==='fr'?'EN':'FR';
+}
+
+// GITHUB STATS
+async function loadGH(){
+  try{
+    const r=await fetch('https://api.github.com/users/ahmedriaahi'),d=await r.json();
+    document.getElementById('gh-repos').textContent=d.public_repos||'—';
+    document.getElementById('gh-followers').textContent=d.followers||'—';
+    document.getElementById('gh-following').textContent=d.following||'—';
+    const rp=await fetch('https://api.github.com/users/ahmedriaahi/repos?per_page=100'),rd=await rp.json();
+    document.getElementById('gh-stars').textContent=rd.reduce((s,r)=>s+(r.stargazers_count||0),0);
+  }catch(e){}
+}
+loadGH();
+
+// CHATBOT
+const kb={
+  'skill':'Ahmed masters ROS2, OpenCV, Python, C++, MATLAB, Qt6, Docker, Gazebo, SolidWorks and TensorFlow!',
+  'project':'Ahmed has 5 projects: 4DOF Robotic Arm, SLAM Robot, Gesture Recognition, User Recognition, and ArUco Distance Measurement.',
+  'contact':'Reach Ahmed at ahmed.riahi@esprit.tn or LinkedIn: linkedin.com/in/riahi-ahmed',
+  'wemaker':'At WEMAKER, Ahmed increased 3D printing calibration from 7 to 95 parts/day using computer vision!',
+  'ros':'Ahmed works with ROS1 (Noetic) and ROS2 (Humble) for autonomous robot development.',
+  'mitacs':'Ahmed is looking for Mitacs Globalink research internship opportunities in robotics or computer vision.',
+  'education':'Ahmed studies at ESPRIT (Mechatronics Engineering) and holds a Master in Advanced Robotics & AI from ISET Bizerte.',
+  'slam':'Ahmed designed the R.PX0 robot in SolidWorks and implemented SLAM gmapping under Gazebo with ROS2.',
+};
+function toggleChat(){const c=document.getElementById('chatbot');c.style.display=c.style.display==='flex'?'none':'flex';}
+function sendMsg(){
+  const inp=document.getElementById('chat-input'),msg=inp.value.trim();if(!msg)return;
+  addMsg(msg,'user');inp.value='';
+  setTimeout(()=>{
+    const low=msg.toLowerCase();
+    let rep="I'm not sure. Try asking about Ahmed's skills, projects, experience or contact!";
+    for(const[k,v]of Object.entries(kb)){if(low.includes(k)){rep=v;break;}}
+    addMsg(rep,'bot');
+  },600);
+}
+function addMsg(t,type){
+  const m=document.getElementById('chat-messages'),d=document.createElement('div');
+  d.className='chat-msg '+type;d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+
+console.log('%c🤖 Ahmed Riahi — Portfolio','color:#6366f1;font-size:20px;font-weight:bold');
+console.log('%c🎉 Easter egg found! Contact: ahmed.riahi@esprit.tn','color:#22d3ee;font-size:13px');
+</script>
+</body>
+</html>
