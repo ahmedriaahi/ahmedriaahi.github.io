@@ -196,24 +196,6 @@
       .modal{max-height:95vh;}
       #chatbot{width:260px;right:0.75rem;}
     }
-
-    /* CERTIFICATIONS */
-    .cert-grid{display:flex;flex-direction:column;gap:0.875rem;}
-    .cert-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:1rem;}
-    .cert-card:hover{border-color:var(--accent2);transform:translateX(4px);}
-    .cert-badge{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .cert-info{flex:1;}
-    .cert-title{font-weight:600;font-size:0.95rem;margin-bottom:0.2rem;}
-    .cert-issuer{color:var(--accent2);font-size:0.8rem;margin-bottom:0.15rem;}
-    .cert-date{color:var(--muted);font-size:0.75rem;font-family:'Fira Code',monospace;}
-    .cert-arrow{color:var(--muted);font-size:1.2rem;transition:color 0.2s;}
-    .cert-card:hover .cert-arrow{color:var(--accent2);}
-    .cert-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem;}
-    .cert-overlay.open{display:flex;}
-    .cert-modal{background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;}
-    .cert-modal-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--card);z-index:1;}
-    .cert-modal-header h2{font-size:1rem;font-weight:600;}
-    .cert-modal-body{padding:1.5rem;}
   </style>
 </head>
 <body class="lang-fr">
@@ -228,7 +210,6 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience"><span data-lang="fr">Expérience</span><span data-lang="en">Experience</span></a></li>
     <li><a href="#projects"><span data-lang="fr">Projets</span><span data-lang="en">Projects</span></a></li>
-    <li><a href="#certifications"><span data-lang="fr">Certifications</span><span data-lang="en">Certifications</span></a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-controls">
@@ -244,4 +225,30 @@
       onerror="this.src='https://avatars.githubusercontent.com/u/ahmedriaahi?v=4';this.onerror=null;">
   </div>
   <div class="hero-right">
-    <div class=
+    <div class="status"><span class="dot"></span><span data-lang="fr">Disponible — Stage de recherche, Alternance ou offre de travail</span><span data-lang="en">Available — Research Internship, Work-Study or Job offer</span></div>
+    <p class="hero-tag">Robotics & AI Engineer</p>
+    <h1><span class="glitch" data-text="Ahmed Riahi">Ahmed Riahi</span></h1>
+    <div class="typewriter"><span id="typewriter-text"></span><span class="cursor"></span></div>
+    <p class="hero-sub">
+      <span data-lang="fr">Étudiant ingénieur en mécatronique spécialisé en robotique autonome, vision par ordinateur et IA embarquée.</span>
+      <span data-lang="en">Mechatronics engineering student specialized in autonomous robotics, computer vision and embedded AI.</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary"><span data-lang="fr">Voir mes projets</span><span data-lang="en">View projects</span></a>
+      <a href="#contact" class="btn-outline"><span data-lang="fr">Me contacter</span><span data-lang="en">Contact me</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <h2 class="section-title fade-in"><span data-lang="fr">Parcours Académique</span><span data-lang="en">Academic Background</span></h2>
+  <div class="timeline">
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="edu-card">
+        <div class="edu-bg" style="background-image:url('assets/esprit.jpg')"></div>
+        <div class="edu-content">
+          <p class="edu-year">2025 — <span data-lang="fr">En cours</span><span data-lang="en">Ongoing</span></p>
+          <p class="edu-titl
