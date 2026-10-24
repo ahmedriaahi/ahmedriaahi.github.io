@@ -29,8 +29,8 @@
     .ctrl-btn:hover{border-color:var(--accent2);color:var(--accent2);}
 
     #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    #particles[aria-hidden="true"]{}
 
-    /* HERO */
     .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 4rem 4rem;position:relative;overflow:hidden;z-index:1;gap:4rem;}
     @media(max-width:480px){.hero{min-height:100svh;}}
     .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(99,102,241,0.12) 0%,transparent 60%);animation:pulse-bg 4s ease-in-out infinite;}
@@ -62,12 +62,10 @@
     section{padding:5rem 2rem;max-width:1000px;margin:0 auto;position:relative;z-index:1;}
     .section-title{font-size:2rem;font-weight:700;margin-bottom:3rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
 
-    /* FADE-IN : n'est actif que si le JS s'exécute (classe .js ajoutée par le script) */
     .js .fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
     .js .fade-in.visible{opacity:1;transform:translateY(0);}
     @media(max-width:900px){.js .fade-in{opacity:1 !important;transform:none !important;}}
 
-    /* TIMELINE */
     .timeline{position:relative;padding:1rem 0;}
     .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2));transform:translateX(-50%);}
     .timeline-item{display:flex;justify-content:flex-end;padding-right:calc(50% + 2rem);margin-bottom:2rem;position:relative;}
@@ -82,7 +80,6 @@
     .edu-title{font-weight:600;font-size:0.95rem;margin-bottom:0.25rem;}
     .edu-school{color:var(--muted);font-size:0.82rem;}
 
-    /* SKILLS */
     .skills-categories{display:flex;flex-direction:column;gap:2rem;}
     .skill-category h4{font-family:'Fira Code',monospace;color:var(--accent2);font-size:0.85rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px;}
     .skills-icons{display:flex;flex-wrap:wrap;gap:1rem;}
@@ -92,7 +89,6 @@
     .skill-icon img{width:1.8rem;height:1.8rem;object-fit:contain;}
     .skill-icon span{font-size:0.7rem;color:var(--muted);text-align:center;}
 
-    /* EXPERIENCE */
     .exp-list{display:flex;flex-direction:column;gap:1rem;}
     .exp-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:1.25rem;cursor:pointer;transition:all 0.2s;}
     .exp-card:hover{border-left-color:var(--accent2);transform:translateX(4px);}
@@ -102,7 +98,6 @@
     .exp-date{color:var(--muted);font-size:0.8rem;font-family:'Fira Code',monospace;}
     .exp-arrow{color:var(--muted);font-size:0.8rem;margin-top:0.5rem;}
 
-    /* PROJECTS */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;}
     .project-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all 0.3s;transform-style:preserve-3d;}
     .project-card:hover{border-color:var(--accent2);transform:translateY(-4px);}
@@ -116,7 +111,6 @@
     .tag{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:var(--text);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.72rem;transition:all 0.2s;}
     .tag:hover{background:rgba(99,102,241,0.25);border-color:var(--accent2);color:var(--accent2);}
 
-    /* MODAL */
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem;}
     .modal-overlay.open{display:flex;}
     .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:750px;width:100%;max-height:90vh;overflow-y:auto;}
@@ -135,14 +129,12 @@
     .modal-link{color:var(--accent2);font-size:0.85rem;text-decoration:none;font-family:'Fira Code',monospace;border:1px solid rgba(34,211,238,0.3);padding:0.4rem 0.875rem;border-radius:6px;transition:all 0.2s;}
     .modal-link:hover{background:rgba(34,211,238,0.1);}
 
-    /* GITHUB STATS */
     .stats-grid{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem;}
     .stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.5rem;text-align:center;min-width:130px;transition:border-color 0.2s;}
     .stat-card:hover{border-color:var(--accent2);}
     .stat-value{font-size:1.75rem;font-weight:700;color:var(--accent2);font-family:'Fira Code',monospace;}
     .stat-label{font-size:0.75rem;color:var(--muted);margin-top:0.25rem;}
 
-    /* CONTACT */
     .contact-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:3rem;text-align:center;}
     .contact-box p{color:var(--muted);margin-bottom:2rem;}
     .contact-icons{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
@@ -152,7 +144,6 @@
     .contact-icon:hover i{border-color:var(--accent2);box-shadow:0 0 20px rgba(34,211,238,0.2);transform:translateY(-4px);}
     .contact-icon span{font-size:0.75rem;font-family:'Fira Code',monospace;}
 
-    /* CHATBOT */
     #chatbot-btn{position:fixed;bottom:5rem;right:1.5rem;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;font-size:1.3rem;box-shadow:0 4px 20px rgba(99,102,241,0.4);z-index:200;transition:transform 0.2s;display:flex;align-items:center;justify-content:center;}
     #chatbot-btn:hover{transform:scale(1.1);}
     #chatbot{position:fixed;bottom:9rem;right:1.5rem;width:300px;background:var(--card);border:1px solid var(--border);border-radius:16px;z-index:200;display:none;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,0.4);overflow:hidden;}
@@ -201,7 +192,6 @@
       #chatbot{width:260px;right:0.75rem;}
     }
 
-    /* CERTIFICATIONS */
     .cert-grid{display:flex;flex-direction:column;gap:0.875rem;}
     .cert-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:1rem;}
     .cert-card:hover{border-color:var(--accent2);transform:translateX(4px);}
@@ -218,16 +208,64 @@
     .cert-modal-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--card);z-index:1;}
     .cert-modal-header h2{font-size:1rem;font-weight:600;}
     .cert-modal-body{padding:1.5rem;}
+
+    /* ══ DASHBOARD TRACKING (invisible pour les visiteurs) ══ */
+    #dash-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9000;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px);}
+    #dash-overlay.open{display:flex;}
+    #dash-box{background:var(--card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(99,102,241,0.25);}
+    #dash-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(34,211,238,0.1));border-radius:20px 20px 0 0;position:sticky;top:0;z-index:1;}
+    #dash-header h2{font-size:1.1rem;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:0.5rem;}
+    #dash-close{background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;transition:color 0.2s;line-height:1;}
+    #dash-close:hover{color:var(--text);}
+    #dash-body{padding:1.5rem;}
+    #pin-screen{text-align:center;padding:1.5rem 0.5rem;}
+    #pin-screen .lock-icon{font-size:3.5rem;margin-bottom:1rem;}
+    #pin-screen p{color:var(--muted);margin-bottom:1.5rem;font-size:0.88rem;}
+    #pin-input{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;color:var(--text);font-size:1rem;width:100%;font-family:'Fira Code',monospace;text-align:center;outline:none;margin-bottom:0.875rem;transition:border-color 0.2s;letter-spacing:2px;}
+    #pin-input:focus{border-color:var(--accent2);}
+    #pin-input.error{border-color:#f87171;animation:shake 0.35s ease;}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+    #pin-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;border-radius:10px;padding:0.8rem 2rem;cursor:pointer;font-size:0.9rem;font-weight:600;width:100%;transition:opacity 0.2s;}
+    #pin-btn:hover{opacity:0.85;}
+    #pin-error{color:#f87171;font-size:0.8rem;margin-top:0.75rem;display:none;padding:0.5rem;background:rgba(248,113,113,0.08);border-radius:6px;}
+    #pin-hint{color:var(--border);font-size:0.7rem;margin-top:1.25rem;font-family:'Fira Code',monospace;}
+    #stats-screen{display:none;}
+    .dstat-row{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem;margin-bottom:1.5rem;}
+    .dstat-box{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.25rem;text-align:center;transition:border-color 0.2s;}
+    .dstat-box:hover{border-color:var(--accent2);}
+    .dstat-num{font-size:2.2rem;font-weight:700;font-family:'Fira Code',monospace;color:var(--accent2);line-height:1;}
+    .dstat-lbl{font-size:0.73rem;color:var(--muted);margin-top:0.4rem;}
+    .dstat-box.g .dstat-num{color:var(--green);}
+    .dstat-box.p .dstat-num{color:#a78bfa;}
+    .chart-section{margin-bottom:1.5rem;}
+    .chart-lbl{font-size:0.78rem;font-weight:600;color:var(--muted);margin-bottom:0.875rem;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;}
+    .chart-bars{display:flex;align-items:flex-end;gap:6px;height:90px;}
+    .bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+    .bar{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--accent),rgba(99,102,241,0.35));transition:height 0.6s cubic-bezier(.4,0,.2,1);min-height:3px;}
+    .bar.today{background:linear-gradient(180deg,var(--green),rgba(16,185,129,0.3));}
+    .bar-day{font-size:0.62rem;color:var(--muted);font-family:'Fira Code',monospace;}
+    .bar-val{font-size:0.65rem;color:var(--accent2);font-weight:600;min-height:0.9rem;}
+    .visits-section{margin-bottom:1rem;}
+    .visit-item{display:flex;justify-content:space-between;align-items:center;padding:0.55rem 0.875rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:0.4rem;font-size:0.78rem;}
+    .visit-time{color:var(--muted);font-family:'Fira Code',monospace;font-size:0.7rem;}
+    .visit-tag{background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.25);color:var(--accent2);padding:0.12rem 0.45rem;border-radius:4px;font-size:0.66rem;}
+    .visit-tag.today{background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3);color:var(--green);}
+    .dash-actions{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border);margin-top:0.5rem;}
+    #logout-btn{background:none;border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:0.45rem 1rem;cursor:pointer;font-size:0.78rem;transition:all 0.2s;}
+    #logout-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+    #reset-btn{background:none;border:1px solid rgba(248,113,113,0.25);color:#f87171;border-radius:8px;padding:0.45rem 1rem;cursor:pointer;font-size:0.78rem;transition:all 0.2s;}
+    #reset-btn:hover{background:rgba(248,113,113,0.08);}
+    .dash-loading{text-align:center;color:var(--muted);font-size:0.85rem;padding:2rem;}
+    /* TOAST */
+    #toast{position:fixed;bottom:4.5rem;left:50%;transform:translateX(-50%) translateY(10px);background:var(--card);border:1px solid var(--accent2);color:var(--accent2);padding:0.55rem 1.25rem;border-radius:20px;font-size:0.78rem;font-family:'Fira Code',monospace;z-index:10000;opacity:0;transition:opacity 0.3s,transform 0.3s;pointer-events:none;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   </style>
-  <script>
-    // Active le mode "animations" uniquement si le JS fonctionne
-    document.documentElement.classList.add('js');
-  </script>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body class="lang-fr">
 
 <div id="progress-bar"></div>
-<canvas id="particles"></canvas>
+<canvas id="particles" aria-hidden="true"></canvas>
 
 <nav>
   <span class="nav-logo">~/ahmedriaahi</span>
@@ -249,7 +287,7 @@
   <div class="hero-bg"></div>
   <div class="hero-left">
     <img src="assets/photo.jpg" alt="Ahmed Riahi" class="hero-photo"
-      onerror="this.src='https://avatars.githubusercontent.com/u/ahmedriaahi?v=4';this.onerror=null;">
+      onerror="this.style.opacity='0.5';this.onerror=null;">
   </div>
   <div class="hero-right">
     <div class="status"><span class="dot"></span><span data-lang="fr">Disponible — Stage de recherche, Alternance ou offre de travail</span><span data-lang="en">Available — Research Internship, Work-Study or Job offer</span></div>
@@ -271,7 +309,6 @@
 <section id="education">
   <h2 class="section-title fade-in"><span data-lang="fr">Parcours Académique</span><span data-lang="en">Academic Background</span></h2>
   <div class="timeline">
-
     <div class="timeline-item fade-in">
       <div class="timeline-dot"></div>
       <div class="edu-card">
@@ -283,7 +320,6 @@
         </div>
       </div>
     </div>
-
     <div class="timeline-item fade-in">
       <div class="timeline-dot"></div>
       <div class="edu-card">
@@ -295,7 +331,6 @@
         </div>
       </div>
     </div>
-
     <div class="timeline-item fade-in">
       <div class="timeline-dot"></div>
       <div class="edu-card">
@@ -307,7 +342,6 @@
         </div>
       </div>
     </div>
-
     <div class="timeline-item fade-in">
       <div class="timeline-dot"></div>
       <div class="edu-card">
@@ -319,7 +353,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -370,51 +403,34 @@
 <section id="experience">
   <h2 class="section-title fade-in"><span data-lang="fr">Expérience Professionnelle</span><span data-lang="en">Professional Experience</span></h2>
   <div class="exp-list">
-
     <div class="exp-card fade-in" onclick="openModal('wemaker')">
       <div class="exp-header">
-        <div>
-          <p class="exp-title"><span data-lang="fr">Stage Ingénieur</span><span data-lang="en">Engineering Internship</span></p>
-          <p class="exp-company">WEMAKER (Startup)</p>
-        </div>
+        <div><p class="exp-title"><span data-lang="fr">Stage Ingénieur</span><span data-lang="en">Engineering Internship</span></p><p class="exp-company">WEMAKER (Startup)</p></div>
         <span class="exp-date">07/2026 – 08/2026</span>
       </div>
       <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
     </div>
-
     <div class="exp-card fade-in" onclick="openModal('iset')">
       <div class="exp-header">
-        <div>
-          <p class="exp-title"><span data-lang="fr">Mémoire de fin d'études</span><span data-lang="en">Final Year Thesis</span></p>
-          <p class="exp-company">ISET Bizerte</p>
-        </div>
+        <div><p class="exp-title"><span data-lang="fr">Mémoire de fin d'études</span><span data-lang="en">Final Year Thesis</span></p><p class="exp-company">ISET Bizerte</p></div>
         <span class="exp-date">02/2025 – 06/2025</span>
       </div>
       <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
     </div>
-
     <div class="exp-card fade-in" onclick="openModal('techpower')">
       <div class="exp-header">
-        <div>
-          <p class="exp-title"><span data-lang="fr">Stage de Fin d'Études</span><span data-lang="en">Final Year Internship</span></p>
-          <p class="exp-company">Tech Power Electronics Group</p>
-        </div>
+        <div><p class="exp-title"><span data-lang="fr">Stage de Fin d'Études</span><span data-lang="en">Final Year Internship</span></p><p class="exp-company">Tech Power Electronics Group</p></div>
         <span class="exp-date">03/2023 – 05/2023</span>
       </div>
       <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
     </div>
-
     <div class="exp-card fade-in" onclick="openModal('techpower2')">
       <div class="exp-header">
-        <div>
-          <p class="exp-title"><span data-lang="fr">Stage de Perfectionnement</span><span data-lang="en">Improvement Internship</span></p>
-          <p class="exp-company">Tech Power Electronics Group</p>
-        </div>
+        <div><p class="exp-title"><span data-lang="fr">Stage de Perfectionnement</span><span data-lang="en">Improvement Internship</span></p><p class="exp-company">Tech Power Electronics Group</p></div>
         <span class="exp-date">01/2022 – 02/2022</span>
       </div>
       <p class="exp-arrow"><span data-lang="fr">→ Cliquer pour voir les détails & photos</span><span data-lang="en">→ Click to see details & photos</span></p>
     </div>
-
   </div>
 </section>
 
@@ -422,7 +438,6 @@
 <section id="projects">
   <h2 class="section-title fade-in"><span data-lang="fr">Projets</span><span data-lang="en">Projects</span></h2>
   <div class="projects-grid">
-
     <div class="project-card fade-in" onclick="openModal('arm')">
       <video class="project-thumb-video" muted loop playsinline
         onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"
@@ -436,7 +451,6 @@
         <div class="tags"><span class="tag">MATLAB</span><span class="tag">Simscape</span></div>
       </div>
     </div>
-
     <div class="project-card fade-in" onclick="openModal('slam')">
       <img src="assets/slam1.png" alt="Robot SLAM" class="project-thumb" onerror="this.style.display='none'">
       <div class="project-body">
@@ -445,7 +459,6 @@
         <div class="tags"><span class="tag">ROS2</span><span class="tag">Gazebo</span><span class="tag">SLAM</span></div>
       </div>
     </div>
-
     <div class="project-card fade-in" onclick="openModal('gesture')">
       <img src="assets/geste.jpg" alt="Reconnaissance Gestuelle" class="project-thumb" onerror="this.style.display='none'">
       <div class="project-body">
@@ -454,7 +467,6 @@
         <div class="tags"><span class="tag">OpenCV</span><span class="tag">Python</span></div>
       </div>
     </div>
-
     <div class="project-card fade-in" onclick="openModal('user')">
       <img src="assets/user1.png" alt="User Recognition" class="project-thumb" onerror="this.style.display='none'">
       <div class="project-body">
@@ -463,7 +475,6 @@
         <div class="tags"><span class="tag">TensorFlow</span><span class="tag">Docker</span></div>
       </div>
     </div>
-
     <div class="project-card fade-in" onclick="openModal('aruco')">
       <video class="project-thumb-video" muted loop playsinline
         onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"
@@ -477,112 +488,53 @@
         <div class="tags"><span class="tag">OpenCV</span><span class="tag">ArUco</span><span class="tag">Python</span></div>
       </div>
     </div>
-
   </div>
 </section>
-
 
 <!-- CERTIFICATIONS -->
 <section id="certifications">
   <h2 class="section-title fade-in"><span data-lang="fr">Certifications</span><span data-lang="en">Certifications</span></h2>
   <div class="cert-grid">
-
     <div class="cert-card fade-in" onclick="openCert('cert_nvida.png','NVIDIA — Applications of AI for Predictive Maintenance','NVIDIA · Oct 2026','')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#76b900,#3f6600)">
-        <i class="fas fa-microchip" style="font-size:2rem;color:white"></i>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">AI for Predictive Maintenance</p>
-        <p class="cert-issuer">NVIDIA · Certificate of Competency</p>
-        <p class="cert-date">Oct 2026</p>
-      </div>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#76b900,#3f6600)"><i class="fas fa-microchip" style="font-size:2rem;color:white"></i></div>
+      <div class="cert-info"><p class="cert-title">AI for Predictive Maintenance</p><p class="cert-issuer">NVIDIA · Certificate of Competency</p><p class="cert-date">Oct 2026</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
     <div class="cert-card fade-in" onclick="openCert('cert_azure.jpg','Microsoft Certified — Azure AI Fundamentals','Microsoft · Avril 2024','verify.certiport.com: wmEyw-48DB')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#0078d4,#005a9e)">
-        <i class="fab fa-microsoft" style="font-size:2rem;color:white"></i>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">Azure AI Fundamentals</p>
-        <p class="cert-issuer">Microsoft Certified</p>
-        <p class="cert-date">Avril 2024</p>
-      </div>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#0078d4,#005a9e)"><i class="fab fa-microsoft" style="font-size:2rem;color:white"></i></div>
+      <div class="cert-info"><p class="cert-title">Azure AI Fundamentals</p><p class="cert-issuer">Microsoft Certified</p><p class="cert-date">Avril 2024</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
     <div class="cert-card fade-in" onclick="openCert('cert_cyber.png','Cisco — Introduction to Cybersecurity','Cisco Networking Academy · Nov 2024','')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#1ba0d7,#005073)">
-        <i class="fas fa-shield-alt" style="font-size:2rem;color:white"></i>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">Introduction to Cybersecurity</p>
-        <p class="cert-issuer">Cisco Networking Academy</p>
-        <p class="cert-date">Nov 2024</p>
-      </div>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#1ba0d7,#005073)"><i class="fas fa-shield-alt" style="font-size:2rem;color:white"></i></div>
+      <div class="cert-info"><p class="cert-title">Introduction to Cybersecurity</p><p class="cert-issuer">Cisco Networking Academy</p><p class="cert-date">Nov 2024</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
     <div class="cert-card fade-in" onclick="openCert('cert_ml.png','Machine Learning Specialization','Coursera · Stanford University & DeepLearning.AI · Jul 2024','https://coursera.org/verify/specialization/EM4ASTBNFJT')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#8B0000,#cc0000)">
-        <span style="font-size:1.2rem;color:white;font-weight:700">Stanford</span>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">Machine Learning Specialization</p>
-        <p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p>
-        <p class="cert-date">Jul 2024 · 3 cours</p>
-      </div>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#8B0000,#cc0000)"><span style="font-size:1.2rem;color:white;font-weight:700">Stanford</span></div>
+      <div class="cert-info"><p class="cert-title">Machine Learning Specialization</p><p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p><p class="cert-date">Jul 2024 · 3 cours</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
     <div class="cert-card fade-in" onclick="openCert('cert_ml1.png','Supervised Machine Learning: Regression & Classification','Coursera · Stanford University & DeepLearning.AI · Jun 2024','https://coursera.org/verify/KAUAD8E2GWXT')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#2d6a4f,#1b4332)">
-        <i class="fas fa-brain" style="font-size:2rem;color:white"></i>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">Supervised Machine Learning</p>
-        <p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p>
-        <p class="cert-date">Jun 2024</p>
-      </div>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#2d6a4f,#1b4332)"><i class="fas fa-brain" style="font-size:2rem;color:white"></i></div>
+      <div class="cert-info"><p class="cert-title">Supervised Machine Learning</p><p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p><p class="cert-date">Jun 2024</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
     <div class="cert-card fade-in" onclick="openCert('cert_ml2.png','Advanced Learning Algorithms','Coursera · Stanford University & DeepLearning.AI · Jul 2024','https://coursera.org/verify/T9P82PPU7YSW')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#6a0572,#4a0352)">
-        <i class="fas fa-network-wired" style="font-size:2rem;color:white"></i>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">Advanced Learning Algorithms</p>
-        <p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p>
-        <p class="cert-date">Jul 2024</p>
-      </div>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#6a0572,#4a0352)"><i class="fas fa-network-wired" style="font-size:2rem;color:white"></i></div>
+      <div class="cert-info"><p class="cert-title">Advanced Learning Algorithms</p><p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p><p class="cert-date">Jul 2024</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
     <div class="cert-card fade-in" onclick="openCert('cert_ml3.png','Unsupervised Learning, Recommenders, Reinforcement Learning','Coursera · Stanford University & DeepLearning.AI · Jul 2024','https://coursera.org/verify/YPTMBW4GTWHF')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#e67e22,#d35400)">
-        <i class="fas fa-robot" style="font-size:2rem;color:white"></i>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">Unsupervised Learning & RL</p>
-        <p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p>
-        <p class="cert-date">Jul 2024</p>
-      </div>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#e67e22,#d35400)"><i class="fas fa-robot" style="font-size:2rem;color:white"></i></div>
+      <div class="cert-info"><p class="cert-title">Unsupervised Learning & RL</p><p class="cert-issuer">Coursera · Stanford & DeepLearning.AI</p><p class="cert-date">Jul 2024</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
-    <div class="cert-card fade-in" onclick="openCert('cert_DELF.jpg','DELF B2 — Diplôme d’Études en Langue Française','France Éducation International · Sep 2023','')">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#002395,#ED2939)">
-        <i class="fas fa-language" style="font-size:2rem;color:white"></i>
-      </div>
-      <div class="cert-info">
-        <p class="cert-title">DELF B2</p>
-        <p class="cert-issuer">France Éducation International</p>
-        <p class="cert-date">Sep 2023</p>
-      </div>
+    <div class="cert-card fade-in" onclick="openCert('cert_DELF.jpg','DELF B2 — Diplôme d\'Études en Langue Française','France Éducation International · Sep 2023','')">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#002395,#ED2939)"><i class="fas fa-language" style="font-size:2rem;color:white"></i></div>
+      <div class="cert-info"><p class="cert-title">DELF B2</p><p class="cert-issuer">France Éducation International</p><p class="cert-date">Sep 2023</p></div>
       <div class="cert-arrow">→</div>
     </div>
-
   </div>
 </section>
 
@@ -618,22 +570,16 @@
   <div class="contact-box fade-in">
     <p><span data-lang="fr">Disponible pour un stage de recherche, une alternance ou une offre de travail — opportunités nationales et internationales.</span><span data-lang="en">Available for a research internship, work-study program or job offer — national and international opportunities.</span></p>
     <div class="contact-icons">
-      <a href="mailto:ahmed.riahi@esprit.tn" class="contact-icon">
-        <i class="fas fa-envelope" style="color:#6366f1"></i><span>Email</span>
-      </a>
-      <a href="https://linkedin.com/in/riahi-ahmed" class="contact-icon" target="_blank">
-        <i class="fab fa-linkedin" style="color:#0077b5"></i><span>LinkedIn</span>
-      </a>
-      <a href="https://github.com/ahmedriaahi" class="contact-icon" target="_blank">
-        <i class="fab fa-github"></i><span>GitHub</span>
-      </a>
+      <a href="mailto:ahmed.riahi@esprit.tn" class="contact-icon"><i class="fas fa-envelope" style="color:#6366f1"></i><span>Email</span></a>
+      <a href="https://linkedin.com/in/riahi-ahmed" class="contact-icon" target="_blank"><i class="fab fa-linkedin" style="color:#0077b5"></i><span>LinkedIn</span></a>
+      <a href="https://github.com/ahmedriaahi" class="contact-icon" target="_blank"><i class="fab fa-github"></i><span>GitHub</span></a>
     </div>
   </div>
 </section>
 
 <footer><p><span data-lang="fr">Conçu & développé par</span><span data-lang="en">Designed & built by</span> <span style="color:var(--accent2)">Ahmed Riahi</span> · 2026</p></footer>
 
-<!-- MODAL -->
+<!-- PROJECT MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-header">
@@ -650,7 +596,7 @@
 </div>
 
 <!-- CHATBOT -->
-<button id="chatbot-btn" onclick="toggleChat()">🤖</button>
+<button id="chatbot-btn" onclick="toggleChat()" aria-label="Ouvrir le chatbot">🤖</button>
 <div id="chatbot">
   <div class="chat-header"><span>🤖 Ask about Ahmed</span><button class="chat-close" onclick="toggleChat()">✕</button></div>
   <div class="chat-messages" id="chat-messages">
@@ -662,10 +608,64 @@
   </div>
 </div>
 
-<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">↑</button>
+
+<!-- ══════════════════════════════════════════
+     DASHBOARD PRIVÉ — Invisible pour les visiteurs
+     Raccourci : Shift + S
+     Code      : Ahmed@2612000riahi
+     ══════════════════════════════════════════ -->
+<div id="dash-overlay">
+  <div id="dash-box">
+    <div id="dash-header">
+      <h2>📊 Dashboard Visites</h2>
+      <button id="dash-close" onclick="closeDash()" aria-label="Fermer">×</button>
+    </div>
+    <div id="dash-body">
+      <!-- ÉCRAN CODE PIN -->
+      <div id="pin-screen">
+        <div class="lock-icon">🔐</div>
+        <p>Accès réservé · Entre ton code secret</p>
+        <input id="pin-input" type="password" placeholder="••••••••••••••••••" autocomplete="off"
+          onkeypress="if(event.key==='Enter')checkPin()">
+        <button id="pin-btn" onclick="checkPin()">Accéder →</button>
+        <div id="pin-error">❌ Code incorrect. Réessaie.</div>
+        <p id="pin-hint">Shift + S · Échap pour fermer</p>
+      </div>
+      <!-- ÉCRAN STATS -->
+      <div id="stats-screen">
+        <div class="dstat-row">
+          <div class="dstat-box"><div class="dstat-num" id="ds-total">—</div><div class="dstat-lbl">Visites totales</div></div>
+          <div class="dstat-box g"><div class="dstat-num" id="ds-today">—</div><div class="dstat-lbl">Aujourd'hui</div></div>
+          <div class="dstat-box p"><div class="dstat-num" id="ds-week">—</div><div class="dstat-lbl">Cette semaine</div></div>
+          <div class="dstat-box"><div class="dstat-num" id="ds-last">—</div><div class="dstat-lbl">Dernière visite</div></div>
+        </div>
+        <div class="chart-section">
+          <p class="chart-lbl">📈 7 derniers jours</p>
+          <div class="chart-bars" id="ds-chart"></div>
+        </div>
+        <div class="visits-section">
+          <p class="chart-lbl">🕐 Dernières visites</p>
+          <div id="ds-log"></div>
+        </div>
+        <div class="dash-actions">
+          <button id="logout-btn" onclick="dashLogout()">↩ Déconnexion</button>
+          <button id="reset-btn" onclick="dashReset()">🗑 Réinitialiser</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-// ---------- FADE IN (en premier, pour que le contenu s'affiche même si la suite plante) ----------
+/* ═══════════════════════════════════════════
+   PORTFOLIO JS — Ahmed Riahi
+   ═══════════════════════════════════════════ */
+
+// ── FADE IN ──
 (function(){
   const els=document.querySelectorAll('.fade-in');
   const showAll=()=>els.forEach(el=>el.classList.add('visible'));
@@ -675,86 +675,20 @@
     }),{threshold:0.05});
     els.forEach(el=>obs.observe(el));
   }else{showAll();}
-  // Filet de sécurité : tout devient visible après 2,5 s quoi qu'il arrive
   setTimeout(showAll,2500);
 })();
 
-// ---------- MODAL DATA ----------
-const modals = {
-  wemaker:{
-    title:'Stage Ingénieur — WEMAKER (Startup)',
-    gallery:[`<img src="assets/wemaker1.jpeg" alt="WeMake Lab">`],
-    desc:`Développé un système de calibration automatique post-production pour pièces imprimées 3D, augmentant le débit de 7 à 95 pièces/jour (+1257%). Conçu un pipeline d'analyse dimensionnelle avec évaluation de précision ±200%, intégré dans une interface GUI Qt6/Python. Utilisation de marqueurs ArUco pour la calibration automatique de la caméra.`,
-    tags:['OpenCV','Qt6','Python','ArUco','Computer Vision','3D Printing'],
-    links:[]
-  },
-  iset:{
-    title:'Mémoire de fin d\'études — ISET Bizerte',
-    gallery:[
-      `<img src="assets/iset1.jpg" alt="Simulation Gazebo">`,
-      `<img src="assets/iset2.png" alt="Robot navigation">`,
-      `<img src="assets/iset3.png" alt="YOLOv8">`,
-      `<img src="assets/iset4.png" alt="Robot désherbage">`
-    ],
-    desc:`Développé un robot mobile autonome de désherbage combinant détection temps réel (YOLOv8) et navigation SLAM sous ROS2/Gazebo avec intégration multi-capteurs (LIDAR, GPS, IMU, caméra). Le robot détecte les mauvaises herbes et navigue de façon autonome dans l'environnement simulé.`,
-    tags:['ROS2','YOLOv8','Gazebo','SLAM','LIDAR','GPS','IMU','Python'],
-    links:[]
-  },
-  techpower:{
-    title:'Stage de Fin d\'Études — Tech Power Electronics Group',
-    gallery:[`<img src="assets/techpower1.png" alt="Machine Siemens">`],
-    desc:`Rénovation et personnalisation de la machine Charge-Lames pour toutes gammes de lames, éliminant les temps de changement inter-gammes. Automatisation en Ladder (TIA Portal/STEP7) augmentant la cadence de production de la ligne. Programmation sur automate Siemens S7 avec interface HMI KTP600.`,
-    tags:['TIA Portal','STEP7','Ladder','Siemens S7','HMI','Automatisation'],
-    links:[]
-  },
-  techpower2:{
-    title:'Stage de Perfectionnement — Tech Power Electronics Group',
-    gallery:[`<img src="assets/techpower2.jpg" alt="Machine Soudure">`],
-    desc:`Étude et analyse fonctionnelle de la machine Soudure-de-Lames. Programmation du cycle de fonctionnement en Ladder pour une efficacité optimale. Optimisation du cycle automatisé avec gain de temps de production significatif.`,
-    tags:['Ladder','Siemens','Automatisation','Analyse fonctionnelle'],
-    links:[]
-  },
-  arm:{
-    title:'Bras Robotique 4DOF — MATLAB/Simscape',
-    gallery:[`<video controls src="https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB/raw/main/Simulation/VID_20260519_151532.mp4"></video>`],
-    desc:`Conception et programmation du contrôle d'un bras robotique 4 degrés de liberté. Simulation dynamique et analyse des mouvements sous MATLAB/Simscape. Modélisation cinématique directe et inverse du bras robotique.`,
-    tags:['MATLAB','Simscape','Robotics','Kinematics','Control Systems'],
-    links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB'}]
-  },
-  slam:{
-    title:'Robot Mobile Autonome — SLAM',
-    gallery:[
-      `<img src="assets/slam1.png" alt="Robot R.PX0 SolidWorks">`,
-      `<img src="assets/slam2.png" alt="Navigation RViz SLAM">`
-    ],
-    desc:`Conception du robot mobile R.PX0 en 3D sous SolidWorks exporté en URDF. Implémentation du SLAM gmapping pour la génération de cartes 2D et la navigation autonome sous Gazebo avec LIDAR virtuel.`,
-    tags:['ROS2','Gazebo','RViz','SLAM','SolidWorks','URDF','LIDAR'],
-    links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/R_PX0-autonomous-robot'}]
-  },
-  gesture:{
-    title:'Reconnaissance Gestuelle par Vision Artificielle',
-    gallery:[`<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7298771712739803136" allowfullscreen></iframe>`],
-    desc:`Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel par vision artificielle. Utilisation d'OpenCV pour le traitement d'image et la détection des contours de la main.`,
-    tags:['OpenCV','Python','Computer Vision','Real-time','MediaPipe'],
-    links:[{label:'→ Voir démo LinkedIn',url:'https://www.linkedin.com/feed/update/urn:li:activity:7298771712739803136'}]
-  },
-  user:{
-    title:'Système de Reconnaissance d\'Utilisateurs',
-    gallery:[
-      `<img src="assets/user1.png" alt="Ahmed 92.26%">`,
-      `<img src="assets/user2.jpg" alt="Messi 100%">`
-    ],
-    desc:`Capturé et traité des images en temps réel avec identification via TensorFlow (Ahmed: 92.26%, Messi: 100%). Déploiement conteneurisé avec Docker pour assurer la portabilité du système sur tous les environnements.`,
-    tags:['TensorFlow','OpenCV','Docker','Python','Deep Learning','CNN'],
-    links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/Real-Time-User-Recognition-'}]
-  },
-  aruco:{
-    title:'Système de Mesure de Distance — ArUco',
-    gallery:[`<video controls src="https://github.com/ahmedriaahi/ahmedriaahi.github.io/raw/main/assets/VID_20260630_123937_1.mp4"></video>`],
-    desc:`Développement d'un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra intégrée. Conception d'une interface modulaire temps réel basée sur une architecture de traitement de frames. 🚧 Projet en cours — images coming soon.`,
-    tags:['OpenCV','ArUco','Python','Camera Calibration','Real-time'],
-    links:[]
-  }
+// ── MODAL DATA ──
+const modals={
+  wemaker:{title:'Stage Ingénieur — WEMAKER (Startup)',gallery:[`<img src="assets/wemaker1.jpeg" alt="WeMake Lab">`],desc:`Développé un système de calibration automatique post-production pour pièces imprimées 3D, augmentant le débit de 7 à 95 pièces/jour (+1257%). Conçu un pipeline d'analyse dimensionnelle avec évaluation de précision ±200%, intégré dans une interface GUI Qt6/Python. Utilisation de marqueurs ArUco pour la calibration automatique de la caméra.`,tags:['OpenCV','Qt6','Python','ArUco','Computer Vision','3D Printing'],links:[]},
+  iset:{title:'Mémoire de fin d\'études — ISET Bizerte',gallery:[`<img src="assets/iset1.jpg" alt="Simulation Gazebo">`,`<img src="assets/iset2.png" alt="Robot navigation">`,`<img src="assets/iset3.png" alt="YOLOv8">`,`<img src="assets/iset4.png" alt="Robot désherbage">`],desc:`Développé un robot mobile autonome de désherbage combinant détection temps réel (YOLOv8) et navigation SLAM sous ROS2/Gazebo avec intégration multi-capteurs (LIDAR, GPS, IMU, caméra). Le robot détecte les mauvaises herbes et navigue de façon autonome dans l'environnement simulé.`,tags:['ROS2','YOLOv8','Gazebo','SLAM','LIDAR','GPS','IMU','Python'],links:[]},
+  techpower:{title:'Stage de Fin d\'Études — Tech Power Electronics Group',gallery:[`<img src="assets/techpower1.png" alt="Machine Siemens">`],desc:`Rénovation et personnalisation de la machine Charge-Lames pour toutes gammes de lames, éliminant les temps de changement inter-gammes. Automatisation en Ladder (TIA Portal/STEP7) augmentant la cadence de production de la ligne.`,tags:['TIA Portal','STEP7','Ladder','Siemens S7','HMI','Automatisation'],links:[]},
+  techpower2:{title:'Stage de Perfectionnement — Tech Power Electronics Group',gallery:[`<img src="assets/techpower2.jpg" alt="Machine Soudure">`],desc:`Étude et analyse fonctionnelle de la machine Soudure-de-Lames. Programmation du cycle de fonctionnement en Ladder pour une efficacité optimale.`,tags:['Ladder','Siemens','Automatisation','Analyse fonctionnelle'],links:[]},
+  arm:{title:'Bras Robotique 4DOF — MATLAB/Simscape',gallery:[`<video controls src="https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB/raw/main/Simulation/VID_20260519_151532.mp4"></video>`],desc:`Conception et programmation du contrôle d'un bras robotique 4 degrés de liberté. Simulation dynamique et analyse des mouvements sous MATLAB/Simscape. Modélisation cinématique directe et inverse.`,tags:['MATLAB','Simscape','Robotics','Kinematics','Control Systems'],links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB'}]},
+  slam:{title:'Robot Mobile Autonome — SLAM',gallery:[`<img src="assets/slam1.png" alt="Robot R.PX0 SolidWorks">`,`<img src="assets/slam2.png" alt="Navigation RViz SLAM">`],desc:`Conception du robot mobile R.PX0 en 3D sous SolidWorks exporté en URDF. Implémentation du SLAM gmapping pour la génération de cartes 2D et la navigation autonome sous Gazebo avec LIDAR virtuel.`,tags:['ROS2','Gazebo','RViz','SLAM','SolidWorks','URDF','LIDAR'],links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/R_PX0-autonomous-robot'}]},
+  gesture:{title:'Reconnaissance Gestuelle par Vision Artificielle',gallery:[`<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7298771712739803136" allowfullscreen></iframe>`],desc:`Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel par vision artificielle. Utilisation d'OpenCV pour le traitement d'image.`,tags:['OpenCV','Python','Computer Vision','Real-time','MediaPipe'],links:[{label:'→ Voir démo LinkedIn',url:'https://www.linkedin.com/feed/update/urn:li:activity:7298771712739803136'}]},
+  user:{title:'Système de Reconnaissance d\'Utilisateurs',gallery:[`<img src="assets/user1.png" alt="Ahmed 92.26%">`,`<img src="assets/user2.jpg" alt="Messi 100%">`],desc:`Capturé et traité des images en temps réel avec identification via TensorFlow (Ahmed: 92.26%, Messi: 100%). Déploiement conteneurisé avec Docker.`,tags:['TensorFlow','OpenCV','Docker','Python','Deep Learning','CNN'],links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/Real-Time-User-Recognition-'}]},
+  aruco:{title:'Système de Mesure de Distance — ArUco',gallery:[`<video controls src="https://github.com/ahmedriaahi/ahmedriaahi.github.io/raw/main/assets/VID_20260630_123937_1.mp4"></video>`],desc:`Développement d'un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra intégrée. 🚧 Projet en cours — images coming soon.`,tags:['OpenCV','ArUco','Python','Camera Calibration','Real-time'],links:[]}
 };
 
 function openModal(id){
@@ -767,31 +701,21 @@ function openModal(id){
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeModal(){
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCert();}});
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
 
-// ---------- TYPEWRITER ----------
+// ── TYPEWRITER ──
 const phrases=['Robotics Engineer','Computer Vision Dev','ROS2 Specialist','AI Enthusiast','Autonomous Systems Dev'];
 let pi=0,ci=0,del=false;
 function tw(){
-  const el=document.getElementById('typewriter-text');
-  if(!el)return;
+  const el=document.getElementById('typewriter-text');if(!el)return;
   const ph=phrases[pi];
-  if(!del){
-    el.textContent=ph.substring(0,ci+1);ci++;
-    if(ci===ph.length){del=true;setTimeout(tw,1800);return;}
-  }else{
-    el.textContent=ph.substring(0,ci-1);ci--;
-    if(ci===0){del=false;pi=(pi+1)%phrases.length;}
-  }
+  if(!del){el.textContent=ph.substring(0,ci+1);ci++;if(ci===ph.length){del=true;setTimeout(tw,1800);return;}}
+  else{el.textContent=ph.substring(0,ci-1);ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
   setTimeout(tw,del?60:100);
 }
 tw();
 
-// ---------- SCROLL ----------
+// ── SCROLL ──
 window.addEventListener('scroll',()=>{
   const max=document.body.scrollHeight-window.innerHeight;
   document.getElementById('progress-bar').style.width=(max>0?window.scrollY/max*100:0)+'%';
@@ -799,7 +723,7 @@ window.addEventListener('scroll',()=>{
   window.scrollY>400?b.classList.add('show'):b.classList.remove('show');
 });
 
-// ---------- THEME & LANG ----------
+// ── THEME & LANG ──
 function toggleTheme(){
   const d=document.documentElement,isDark=d.getAttribute('data-theme')==='dark';
   d.setAttribute('data-theme',isDark?'light':'dark');
@@ -812,51 +736,34 @@ function toggleLang(){
   document.getElementById('lang-btn').textContent=lang==='fr'?'EN':'FR';
 }
 
-// ---------- CERTIFICATIONS ----------
-function openCert(img, title, issuer, link) {
-  const el = document.getElementById('cert-modal-img');
-  const base = img.replace(/\.[^.]+$/, '');
-  const candidates = [img];
-  ['jpg','jpeg','png','webp','JPG','JPEG','PNG'].forEach(ext => {
-    candidates.push(base + '.' + ext);
-    candidates.push(base.toLowerCase() + '.' + ext);
-    candidates.push(base.toUpperCase() + '.' + ext);
-  });
-  let i = 0;
-  el.onerror = () => {
-    i++;
-    if (i < candidates.length) {
-      el.src = 'assets/' + candidates[i];
-    } else {
-      el.onerror = null;
-      el.removeAttribute('src');
-      el.alt = 'Image introuvable : assets/' + img;
-    }
-  };
-  el.src = 'assets/' + candidates[0];
-  document.getElementById('cert-modal-title').textContent = title;
-  document.getElementById('cert-modal-issuer').textContent = issuer;
-  const linkEl = document.getElementById('cert-modal-link');
-  if(link && link.indexOf('http')===0) { linkEl.href = link; linkEl.style.display = 'inline-block'; }
-  else { linkEl.style.display = 'none'; }
+// ── CERTIFICATIONS ──
+function openCert(img,title,issuer,link){
+  const el=document.getElementById('cert-modal-img');
+  const base=img.replace(/\.[^.]+$/,'');
+  const candidates=[img,'jpg','jpeg','png','webp'].map(e=>base+'.'+e);
+  let i=0;
+  el.onerror=()=>{i++;if(i<candidates.length){el.src='assets/'+candidates[i];}else{el.onerror=null;el.alt='Image introuvable';}};
+  el.src='assets/'+candidates[0];
+  document.getElementById('cert-modal-title').textContent=title;
+  document.getElementById('cert-modal-issuer').textContent=issuer;
+  const linkEl=document.getElementById('cert-modal-link');
+  if(link&&link.indexOf('http')===0){linkEl.href=link;linkEl.style.display='inline-block';}
+  else{linkEl.style.display='none';}
   document.getElementById('cert-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-function closeCert() {
-  document.getElementById('cert-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function closeCert(){document.getElementById('cert-overlay').classList.remove('open');document.body.style.overflow='';}
 
-// ---------- CHATBOT ----------
+// ── CHATBOT ──
 const kb={
-  'skill':'Ahmed masters ROS2, OpenCV, Python, C++, MATLAB, Qt6, Docker, Gazebo, SolidWorks and TensorFlow!',
-  'project':'Ahmed has 5 projects: 4DOF Robotic Arm, SLAM Robot, Gesture Recognition, User Recognition, and ArUco Distance Measurement.',
-  'contact':'Reach Ahmed at ahmed.riahi@esprit.tn or LinkedIn: linkedin.com/in/riahi-ahmed',
-  'wemaker':'At WEMAKER, Ahmed increased 3D printing calibration from 7 to 95 parts/day using computer vision!',
-  'ros':'Ahmed works with ROS1 (Noetic) and ROS2 (Humble) for autonomous robot development.',
-  'mitacs':'Ahmed is looking for Mitacs Globalink research internship opportunities in robotics or computer vision.',
-  'education':'Ahmed studies at ESPRIT (Mechatronics Engineering) and holds a Master in Advanced Robotics & AI from ISET Bizerte.',
-  'slam':'Ahmed designed the R.PX0 robot in SolidWorks and implemented SLAM gmapping under Gazebo with ROS2.'
+  'skill':'Ahmed maîtrise ROS2, OpenCV, Python, C++, MATLAB, Qt6, Docker, Gazebo, SolidWorks et TensorFlow !',
+  'project':'Ahmed a 5 projets : Bras Robotique 4DOF, Robot SLAM, Reconnaissance Gestuelle, Reconnaissance Utilisateurs, et Mesure Distance ArUco.',
+  'contact':'Contacte Ahmed à ahmed.riahi@esprit.tn ou LinkedIn : linkedin.com/in/riahi-ahmed',
+  'wemaker':'Chez WEMAKER, Ahmed a augmenté la cadence de calibration 3D de 7 à 95 pièces/jour grâce à la vision par ordinateur !',
+  'ros':'Ahmed travaille avec ROS1 (Noetic) et ROS2 (Humble) pour le développement de robots autonomes.',
+  'mitacs':'Ahmed candidate au programme Mitacs Globalink pour un stage de recherche en robotique ou vision par ordinateur.',
+  'education':'Ahmed étudie à ESPRIT (Cycle Ingénieur Mécatronique) et est titulaire d\'un Master en Robotique Avancée & IA d\'ISET Bizerte.',
+  'slam':'Ahmed a conçu le robot R.PX0 sous SolidWorks et implémenté le SLAM gmapping sous Gazebo avec ROS2.'
 };
 function toggleChat(){const c=document.getElementById('chatbot');c.style.display=c.style.display==='flex'?'none':'flex';}
 function sendMsg(){
@@ -864,7 +771,7 @@ function sendMsg(){
   addMsg(msg,'user');inp.value='';
   setTimeout(()=>{
     const low=msg.toLowerCase();
-    let rep="I'm not sure. Try asking about Ahmed's skills, projects, experience or contact!";
+    let rep="Je ne suis pas sûr. Essaie de demander les compétences, projets, expériences ou contact d'Ahmed !";
     for(const[k,v]of Object.entries(kb)){if(low.includes(k)){rep=v;break;}}
     addMsg(rep,'bot');
   },600);
@@ -874,7 +781,7 @@ function addMsg(t,type){
   d.className='chat-msg '+type;d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
 
-// ---------- GITHUB STATS ----------
+// ── GITHUB STATS ──
 async function loadGH(){
   try{
     const r=await fetch('https://api.github.com/users/ahmedriaahi'),d=await r.json();
@@ -882,12 +789,12 @@ async function loadGH(){
     document.getElementById('gh-followers').textContent=d.followers||'—';
     document.getElementById('gh-following').textContent=d.following||'—';
     const rp=await fetch('https://api.github.com/users/ahmedriaahi/repos?per_page=100'),rd=await rp.json();
-    document.getElementById('gh-stars').textContent=rd.reduce((s,r)=>s+(r.stargazers_count||0),0);
+    document.getElementById('gh-stars').textContent=Array.isArray(rd)?rd.reduce((s,r)=>s+(r.stargazers_count||0),0):'—';
   }catch(e){}
 }
 loadGH();
 
-// ---------- 3D TILT ----------
+// ── 3D TILT ──
 document.querySelectorAll('.project-card').forEach(card=>{
   card.addEventListener('mousemove',e=>{
     const r=card.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
@@ -896,40 +803,216 @@ document.querySelectorAll('.project-card').forEach(card=>{
   card.addEventListener('mouseleave',()=>{card.style.transform='none';});
 });
 
-// ---------- PARTICLES (en dernier : décoratif) ----------
+// ── PARTICLES ──
 (function(){
-  const canvas=document.getElementById('particles');
-  if(!canvas)return;
+  const canvas=document.getElementById('particles');if(!canvas)return;
   const ctx=canvas.getContext('2d');
   let mouse={x:null,y:null};
-  function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-  resizeCanvas();
-  window.addEventListener('resize',resizeCanvas);
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
   window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
-  const pts=[];
-  const isMobile=window.innerWidth<768;
+  const pts=[];const isMobile=window.innerWidth<768;
   for(let i=0;i<(isMobile?25:60);i++)pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,size:Math.random()*2+.5,alpha:Math.random()*.4+.1});
-  function animPts(){
+  function anim(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     pts.forEach(p=>{
       if(mouse.x){const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){p.vx-=dx*.0003;p.vy-=dy*.0003;}}
       p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>canvas.width)p.vx*=-1;
-      if(p.y<0||p.y>canvas.height)p.vy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-      ctx.fillStyle=`rgba(99,102,241,${p.alpha})`;ctx.fill();
+      if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(99,102,241,${p.alpha})`;ctx.fill();
     });
     pts.forEach((p,i)=>pts.slice(i+1).forEach(p2=>{
       const dx=p.x-p2.x,dy=p.y-p2.y,d=Math.sqrt(dx*dx+dy*dy);
       if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(99,102,241,${.12*(1-d/100)})`;ctx.lineWidth=.5;ctx.stroke();}
     }));
-    requestAnimationFrame(animPts);
+    requestAnimationFrame(anim);
   }
-  animPts();
+  anim();
 })();
+
+// ── KEYBOARD ESC ──
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeModal();closeCert();}
+});
 
 console.log('%c🤖 Ahmed Riahi — Portfolio','color:#6366f1;font-size:20px;font-weight:bold');
 console.log('%c🎉 Easter egg found! Contact: ahmed.riahi@esprit.tn','color:#22d3ee;font-size:13px');
+
+/* ═══════════════════════════════════════════
+   SYSTÈME DE TRACKING PRIVÉ
+   Raccourci : Shift + S
+   Code      : Ahmed@2612000riahi
+   ═══════════════════════════════════════════ */
+const DASH_SECRET='Ahmed@2612000riahi';
+let dashDB=null,dashAuth=false;
+
+async function initDashDB(){
+  try{dashDB=await claude.use('db');}catch(e){dashDB=null;}
+}
+
+async function recordVisit(){
+  if(!dashDB)return;
+  try{
+    const now=new Date();
+    const dateKey=now.toISOString().split('T')[0];
+    const ts=now.toISOString();
+    // Compteur global
+    let g;try{g=await dashDB.doc('stats/global').get();}catch(e){g=null;}
+    const gd=g?g.data:{total:0};
+    gd.total=(gd.total||0)+1;gd.lastVisit=ts;
+    await dashDB.doc('stats/global').set(gd);
+    // Compteur du jour
+    let day;try{day=await dashDB.doc('days/'+dateKey).get();}catch(e){day=null;}
+    const dd=day?day.data:{count:0,date:dateKey};
+    dd.count=(dd.count||0)+1;
+    await dashDB.doc('days/'+dateKey).set(dd);
+    // Log des 20 dernières visites
+    let log;try{log=await dashDB.doc('stats/log').get();}catch(e){log=null;}
+    const ld=log?log.data:{visits:[]};
+    if(!ld.visits)ld.visits=[];
+    ld.visits.unshift({ts,date:dateKey});
+    if(ld.visits.length>20)ld.visits=ld.visits.slice(0,20);
+    await dashDB.doc('stats/log').set(ld);
+  }catch(e){}
+}
+
+function openDash(){
+  document.getElementById('dash-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(!dashAuth){showPinScreen();}else{showStatsScreen();}
+}
+function closeDash(){
+  document.getElementById('dash-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function showPinScreen(){
+  document.getElementById('pin-screen').style.display='block';
+  document.getElementById('stats-screen').style.display='none';
+  document.getElementById('pin-error').style.display='none';
+  document.getElementById('pin-input').value='';
+  setTimeout(()=>document.getElementById('pin-input').focus(),150);
+}
+function checkPin(){
+  const v=document.getElementById('pin-input').value;
+  if(v===DASH_SECRET){
+    dashAuth=true;
+    document.getElementById('pin-screen').style.display='none';
+    document.getElementById('stats-screen').style.display='block';
+    showStatsScreen();
+  }else{
+    const inp=document.getElementById('pin-input');
+    inp.classList.add('error');inp.value='';
+    document.getElementById('pin-error').style.display='block';
+    setTimeout(()=>{inp.classList.remove('error');document.getElementById('pin-error').style.display='none';inp.focus();},1800);
+  }
+}
+function showStatsScreen(){loadDashStats();}
+
+async function loadDashStats(){
+  if(!dashDB){
+    document.getElementById('ds-total').textContent='N/A';
+    document.getElementById('ds-today').textContent='N/A';
+    document.getElementById('ds-week').textContent='N/A';
+    document.getElementById('ds-last').textContent='N/A';
+    return;
+  }
+  try{
+    // Global
+    let g;try{g=await dashDB.doc('stats/global').get();}catch(e){g=null;}
+    const gd=g?g.data:{total:0,lastVisit:null};
+    document.getElementById('ds-total').textContent=gd.total||0;
+    if(gd.lastVisit){
+      const diff=Math.floor((Date.now()-new Date(gd.lastVisit).getTime())/60000);
+      let lbl;
+      if(diff<1)lbl='À l\'instant';
+      else if(diff<60)lbl=diff+'min';
+      else if(diff<1440)lbl=Math.floor(diff/60)+'h';
+      else lbl=Math.floor(diff/1440)+'j';
+      document.getElementById('ds-last').textContent=lbl;
+    }else{document.getElementById('ds-last').textContent='—';}
+
+    // 7 jours
+    const today=new Date();
+    const days7=[];let weekTotal=0,todayCount=0;
+    const jours=['dim','lun','mar','mer','jeu','ven','sam'];
+    for(let i=6;i>=0;i--){
+      const d=new Date(today);d.setDate(d.getDate()-i);
+      const key=d.toISOString().split('T')[0];
+      const lbl=i===0?'auj.':jours[d.getDay()];
+      let dd;try{dd=await dashDB.doc('days/'+key).get();}catch(e){dd=null;}
+      const cnt=dd?(dd.data.count||0):0;
+      days7.push({label:lbl,count:cnt,isToday:i===0});
+      weekTotal+=cnt;if(i===0)todayCount=cnt;
+    }
+    document.getElementById('ds-today').textContent=todayCount;
+    document.getElementById('ds-week').textContent=weekTotal;
+
+    // Graphe
+    const maxV=Math.max(...days7.map(d=>d.count),1);
+    const chartEl=document.getElementById('ds-chart');chartEl.innerHTML='';
+    days7.forEach(d=>{
+      const h=Math.max((d.count/maxV)*100,3);
+      const w=document.createElement('div');w.className='bar-wrap';
+      w.innerHTML=`<div class="bar-val">${d.count||''}</div><div class="bar${d.isToday?' today':''}" style="height:${h}%"></div><div class="bar-day">${d.label}</div>`;
+      chartEl.appendChild(w);
+    });
+
+    // Log
+    let log;try{log=await dashDB.doc('stats/log').get();}catch(e){log=null;}
+    const visits=log?(log.data.visits||[]):[];
+    const logEl=document.getElementById('ds-log');logEl.innerHTML='';
+    const todayKey=today.toISOString().split('T')[0];
+    if(visits.length===0){
+      logEl.innerHTML='<p style="color:var(--muted);font-size:0.82rem;text-align:center;padding:1rem">Aucune visite enregistrée.</p>';
+    }else{
+      visits.slice(0,8).forEach((v,i)=>{
+        const d=new Date(v.ts);
+        const ds=d.toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});
+        const ts=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+        const isT=v.date===todayKey;
+        const el=document.createElement('div');el.className='visit-item';
+        el.innerHTML=`<span style="color:var(--text)">#${i+1} — Visiteur</span><span class="visit-time">${ds} à ${ts}</span><span class="visit-tag${isT?' today':''}">${isT?'auj.':'passé'}</span>`;
+        logEl.appendChild(el);
+      });
+    }
+  }catch(e){showToast('Erreur de chargement');}
+}
+
+async function dashReset(){
+  if(!confirm('⚠️ Effacer TOUTES les données de visites ? Action irréversible.'))return;
+  if(!dashDB)return;
+  try{
+    await dashDB.doc('stats/global').set({total:0,lastVisit:null});
+    await dashDB.doc('stats/log').set({visits:[]});
+    showToast('✅ Données réinitialisées');
+    loadDashStats();
+  }catch(e){showToast('Erreur lors de la réinitialisation');}
+}
+function dashLogout(){dashAuth=false;showPinScreen();}
+
+function showToast(msg,ms=2500){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),ms);
+}
+
+// Raccourci Shift + S
+document.addEventListener('keydown',e=>{
+  if(e.shiftKey&&(e.key==='S'||e.key==='s')){
+    e.preventDefault();
+    const o=document.getElementById('dash-overlay');
+    o.classList.contains('open')?closeDash():openDash();
+  }
+  if(e.key==='Escape'){closeDash();}
+});
+document.getElementById('dash-overlay').addEventListener('click',e=>{
+  if(e.target===document.getElementById('dash-overlay'))closeDash();
+});
+
+// Démarrage : init DB + enregistrer visite
+(async()=>{
+  await initDashDB();
+  await recordVisit();
+})();
 </script>
 </body>
 </html>
