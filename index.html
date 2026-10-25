@@ -1018,7 +1018,7 @@ async function sendMsg() {
         body: JSON.stringify({
           contents,
           generationConfig: {
-            maxOutputTokens: 300,
+            maxOutputTokens: 350,
             temperature: 0.7,
           }
         })
@@ -1026,13 +1026,35 @@ async function sendMsg() {
     );
 
     const data = await response.json();
+    const loadEl = document.getElementById(loadId);
+
+    // Détecter les erreurs API Gemini (clé invalide, quota, etc.)
+    if (data.error) {
+      const code = data.error.status || '';
+      let errMsg = '';
+      if (code === 'INVALID_ARGUMENT' || code === 'UNAUTHENTICATED' || data.error.code === 400 || data.error.code === 401) {
+        // Clé invalide → on la supprime et on redemande
+        localStorage.removeItem('gmk');
+        errMsg = lang === 'fr'
+          ? '🔑 Clé API invalide. Clique sur 🔑 pour entrer une clé valide.'
+          : '🔑 Invalid API key. Click 🔑 to enter a valid key.';
+      } else if (data.error.code === 429) {
+        errMsg = lang === 'fr'
+          ? '⏳ Quota dépassé. Réessaie dans une minute.'
+          : '⏳ Quota exceeded. Try again in a minute.';
+      } else {
+        errMsg = `⚠️ Erreur API : ${data.error.message || data.error.status}`;
+      }
+      if (loadEl) { loadEl.classList.remove('loading'); loadEl.textContent = errMsg; }
+      inp.disabled = false; document.querySelector('.chat-send').disabled = false;
+      return;
+    }
+
     const reply = data.candidates?.[0]?.content?.parts?.[0]?.text
       || (lang === 'fr'
         ? "Désolé, je n'ai pas pu répondre. Contacte Ahmed : ahmed.riahi@esprit.tn"
         : "Sorry, I couldn't respond. Contact Ahmed: ahmed.riahi@esprit.tn");
 
-    // Mettre à jour le message de chargement avec la vraie réponse
-    const loadEl = document.getElementById(loadId);
     if (loadEl) {
       loadEl.classList.remove('loading');
       loadEl.textContent = reply;
@@ -1045,8 +1067,8 @@ async function sendMsg() {
     if (loadEl) {
       loadEl.classList.remove('loading');
       loadEl.textContent = lang === 'fr'
-        ? '⚠️ Connexion impossible. Contacte Ahmed : ahmed.riahi@esprit.tn'
-        : '⚠️ Connection failed. Contact Ahmed: ahmed.riahi@esprit.tn';
+        ? `⚠️ Erreur réseau : ${e.message}. Vérifie ta connexion.`
+        : `⚠️ Network error: ${e.message}. Check your connection.`;
     }
   }
 
