@@ -205,10 +205,7 @@
     .chat-input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;color:var(--text);font-size:0.8rem;outline:none;}
     .chat-input:focus{border-color:var(--accent2);}
     .chat-send{background:var(--accent);border:none;color:white;border-radius:8px;padding:0.5rem 0.75rem;cursor:pointer;font-size:0.8rem;}
-    .chat-send:disabled{opacity:0.5;cursor:not-allowed;}
-    .chat-input:disabled{opacity:0.6;}
-    .chat-msg.loading{opacity:0.7;font-style:italic;letter-spacing:3px;animation:chatdots 1s infinite;}
-    @keyframes chatdots{0%,100%{opacity:0.4}50%{opacity:1}}
+    .chat-msg{white-space:pre-line;}
 
     #back-top{position:fixed;bottom:1.5rem;right:1.5rem;width:42px;height:42px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:1rem;display:none;align-items:center;justify-content:center;z-index:200;transition:all 0.2s;}
     #back-top:hover{border-color:var(--accent2);color:var(--accent2);transform:translateY(-3px);}
@@ -688,10 +685,7 @@
 <div id="chatbot" role="dialog" aria-label="Chatbot Ahmed Riahi">
   <div class="chat-header">
     <span>🤖 <span data-lang="fr">Posez une question</span><span data-lang="en">Ask about Ahmed</span></span>
-    <div style="display:flex;gap:0.5rem;align-items:center;">
-      <button onclick="resetGeminiKey()" title="Changer la clé API" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:0.75rem;padding:0.2rem 0.4rem;border-radius:4px;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">🔑</button>
-      <button class="chat-close" onclick="toggleChat()" aria-label="Fermer">✕</button>
-    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Fermer le chatbot">✕</button>
   </div>
   <div class="chat-messages" id="chat-messages">
     <div class="chat-msg bot" id="chat-welcome">
@@ -857,100 +851,138 @@ function openCert(img,title,issuer,link){
 }
 function closeCert(){document.getElementById('cert-overlay').classList.remove('open');document.body.style.overflow='';}
 
-// ── CHATBOT CLAUDE API ──
-
-// Historique de la conversation pour le contexte
-const chatHistory = [];
-
-// Profil complet d'Ahmed — contexte injecté dans chaque requête
-const AHMED_PROFILE = `
-Tu es l'assistant personnel du portfolio d'Ahmed Riahi. Tu réponds UNIQUEMENT aux questions concernant Ahmed.
-Réponds dans la même langue que la question posée (français ou anglais).
-Sois concis, chaleureux et professionnel. Maximum 3-4 phrases par réponse.
-Si la question ne concerne pas Ahmed, redirige poliment vers son profil.
-
-=== PROFIL COMPLET D'AHMED RIAHI ===
-
-IDENTITÉ :
-- Nom : Ahmed Riahi
-- Basé à : Bizerte, Tunisie
-- Email : ahmed.riahi@esprit.tn
-- LinkedIn : linkedin.com/in/riahi-ahmed
-- GitHub : github.com/ahmedriaahi
-- Disponibilité : Janvier 2027 — Stage de recherche, alternance ou offre d'emploi (national & international)
-- Candidat au programme Mitacs Globalink (robotique / vision par ordinateur)
-
-FORMATION :
-- 2025–2027 : Cycle Ingénieur Électromécanique/Mécatronique — ESPRIT, El Ghazella (2ème de classe, moy. 14.99/20)
-- 2023–2025 : Master Robotique Avancée & IA — ISET Bizerte
-- 2020–2023 : Licence Génie Électrique, Automatisme & Informatique Industrielle — ISET Bizerte
-- 2019–2020 : Baccalauréat Mathématiques — Bizerte
-
-COMPÉTENCES TECHNIQUES :
-- Frameworks : ROS2 (Humble), ROS1 (Noetic), OpenCV, TensorFlow, YOLOv8, MediaPipe
-- Langages : Python, C++, C, MATLAB
-- Outils : Docker, Qt6, VS Code, GitHub, Linux (Ubuntu)
-- Simulation & CAO : Gazebo, RViz, Webots, SolidWorks, URDF
-- Domaines : SLAM, Navigation autonome, Computer Vision, IA embarquée, Contrôle robotique, Cinématique
-
-EXPÉRIENCES PROFESSIONNELLES :
-1. Stage Ingénieur — WEMAKER Startup (07/2026–08/2026)
-   → Système de calibration automatique post-production pour pièces imprimées 3D
-   → Débit augmenté de 7 à 95 pièces/jour (+1257%) grâce à la vision par ordinateur
-   → Pipeline d'analyse dimensionnelle ±200%, interface Qt6/Python, marqueurs ArUco
-
-2. Mémoire de fin d'études — ISET Bizerte (02/2025–06/2025)
-   → Robot mobile autonome de désherbage
-   → YOLOv8 pour détection temps réel + SLAM gmapping sous ROS2/Gazebo
-   → Multi-capteurs : LIDAR, GPS, IMU, caméra
-
-3. Stage Fin d'Études — Tech Power Electronics Group (03/2023–05/2023)
-   → Rénovation machine Charge-Lames, automatisation Ladder (TIA Portal/STEP7)
-   → Automate Siemens S7, interface HMI KTP600
-
-4. Stage Perfectionnement — Tech Power Electronics Group (01/2022–02/2022)
-   → Analyse fonctionnelle machine Soudure-de-Lames
-   → Programmation cycle automatisé en Ladder
-
-PROJETS :
-1. Bras Robotique 4DOF (MATLAB/Simscape)
-   → Contrôle et simulation dynamique, cinématique directe et inverse
-   → GitHub : github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB
-
-2. Robot Mobile Autonome SLAM (ROS2/Gazebo)
-   → Robot R.PX0 conçu en SolidWorks, exporté URDF
-   → SLAM gmapping, navigation autonome, LIDAR virtuel
-   → GitHub : github.com/ahmedriaahi/R_PX0-autonomous-robot
-
-3. Reconnaissance Gestuelle (OpenCV/Python)
-   → Détection nombre de doigts en temps réel par vision artificielle
-   → Traitement d'image, contours de la main, MediaPipe
-
-4. Reconnaissance Utilisateurs (TensorFlow/Docker)
-   → Identification temps réel : Ahmed 92.26%, Messi 100%
-   → Déploiement conteneurisé Docker
-   → GitHub : github.com/ahmedriaahi/Real-Time-User-Recognition-
-
-5. Mesure Distance ArUco (OpenCV/Python)
-   → Détection et estimation de distance par marqueurs ArUco
-   → Calibration caméra intégrée, architecture temps réel
-   → Projet en cours
-
-CERTIFICATIONS :
-- NVIDIA — AI for Predictive Maintenance (Oct 2026)
-- Microsoft Certified — Azure AI Fundamentals (Avril 2024)
-- Cisco — Introduction to Cybersecurity (Nov 2024)
-- Machine Learning Specialization — Coursera / Stanford & DeepLearning.AI (Jul 2024, 3 cours)
-  • Supervised Machine Learning: Regression & Classification
-  • Advanced Learning Algorithms
-  • Unsupervised Learning, Recommenders & Reinforcement Learning
-- DELF B2 — France Éducation International (Sep 2023)
-
-LANGUES :
-- Arabe : langue maternelle
-- Français : courant (DELF B2)
-- Anglais : professionnel
-`;
+// ── CHATBOT STATIQUE ENRICHI ──
+const FAQ = {
+  fr: [
+    // Identité
+    { k:['qui es-tu','qui est ahmed','présente-toi','tell me about','c\'est qui','parle-moi de toi','about you','who are you','who is ahmed'],
+      r:'Ahmed Riahi est un ingénieur en mécatronique basé à Bizerte, Tunisie. Spécialisé en robotique autonome, vision par ordinateur et IA embarquée. Actuellement en Cycle Ingénieur à ESPRIT (2ème de classe, 14.99/20). 🤖' },
+    // Contact
+    { k:['contact','email','mail','joindre','reach','linkedin','github','réseaux'],
+      r:'📧 ahmed.riahi@esprit.tn\n💼 linkedin.com/in/riahi-ahmed\n💻 github.com/ahmedriaahi\nN\'hésite pas à le contacter pour toute opportunité !' },
+    // Disponibilité
+    { k:['disponible','disponibilité','quand','stage','internship','alternance','embauche','recruit','hire','open to'],
+      r:'✅ Ahmed est disponible à partir de Janvier 2027 pour un stage de recherche, une alternance ou une offre d\'emploi — opportunités nationales et internationales bienvenues !' },
+    // Mitacs
+    { k:['mitacs','globalink','canada','recherche','research'],
+      r:'Ahmed est candidat au programme Mitacs Globalink pour un stage de recherche au Canada en robotique ou vision par ordinateur. Ce programme connecte les étudiants internationaux avec des universités canadiennes. 🍁' },
+    // Formation ESPRIT
+    { k:['esprit','ingénieur','mécatronique','electromécanique','cycle ingénieur','engineering'],
+      r:'Ahmed suit le Cycle Ingénieur Électromécanique/Mécatronique à ESPRIT (El Ghazella) depuis 2025. Il est classé 2ème de sa classe avec une moyenne de 14.99/20. 🎓' },
+    // Formation ISET
+    { k:['iset','master','robotique','intelligence artificielle','licence','génie électrique','formation','études','education','degree'],
+      r:'Parcours d\'Ahmed :\n🎓 2025–2027 : Ingénieur Mécatronique — ESPRIT (2ème/classe, 14.99/20)\n🎓 2023–2025 : Master Robotique & IA — ISET Bizerte\n🎓 2020–2023 : Licence Génie Électrique — ISET Bizerte\n🎓 2019–2020 : Bac Mathématiques' },
+    // Compétences générales
+    { k:['compétence','skill','technologie','stack','maîtrise','what can','what do you know','languages','outils','tools'],
+      r:'🛠️ Stack d\'Ahmed :\n• Frameworks : ROS2, OpenCV, TensorFlow, YOLOv8\n• Langages : Python, C++, C, MATLAB\n• Outils : Docker, Qt6, Linux, GitHub\n• Simulation : Gazebo, RViz, Webots, SolidWorks' },
+    // ROS
+    { k:['ros','ros2','ros 2','robotic operating','navigation','nav2'],
+      r:'Ahmed maîtrise ROS2 (Humble) et ROS1 (Noetic). Il l\'utilise pour la navigation autonome, le SLAM, la gestion de capteurs (LIDAR, IMU, GPS) et l\'intégration de modèles 3D URDF. 🤖' },
+    // OpenCV / Vision
+    { k:['opencv','vision','computer vision','image','traitement','detection','détection','yolo','yolov8'],
+      r:'Ahmed est expert en vision par ordinateur avec OpenCV et YOLOv8. Il a développé des systèmes de détection temps réel : reconnaissance gestuelle, identification d\'utilisateurs, calibration par marqueurs ArUco et détection de mauvaises herbes. 👁️' },
+    // Python
+    { k:['python','programmation','code','coding','développement'],
+      r:'Python est le langage principal d\'Ahmed. Il l\'utilise pour la vision par ordinateur (OpenCV), le deep learning (TensorFlow), les interfaces GUI (Qt6/PyQt) et le développement ROS2. 🐍' },
+    // SLAM
+    { k:['slam','cartographie','mapping','navigation autonome','autonomous','lidar','localisation'],
+      r:'Ahmed a implémenté le SLAM gmapping sous ROS2/Gazebo pour son projet de robot autonome R.PX0. Le robot génère des cartes 2D et navigue de façon autonome grâce à un LIDAR virtuel et une fusion multi-capteurs. 🗺️' },
+    // Docker
+    { k:['docker','conteneur','container','déploiement','deployment'],
+      r:'Ahmed utilise Docker pour le déploiement conteneurisé de ses applications. Il l\'a utilisé notamment pour son système de reconnaissance d\'utilisateurs (TensorFlow), garantissant la portabilité sur tous les environnements. 🐳' },
+    // MATLAB / Simscape
+    { k:['matlab','simscape','simulation','simulink','cinématique','kinematics'],
+      r:'Ahmed maîtrise MATLAB/Simscape pour la modélisation et simulation dynamique. Son projet phare : un bras robotique 4DOF avec cinématique directe et inverse. ⚙️' },
+    // SolidWorks
+    { k:['solidworks','cad','cao','3d','conception','design mécanique'],
+      r:'Ahmed utilise SolidWorks pour la conception 3D mécanique. Il a conçu le robot mobile R.PX0 sous SolidWorks, puis l\'a exporté en format URDF pour la simulation ROS2/Gazebo. 🔩' },
+    // TensorFlow / Deep Learning
+    { k:['tensorflow','deep learning','réseau de neurones','neural network','cnn','apprentissage','machine learning','ml','ia','ai','intelligence artificielle'],
+      r:'Ahmed travaille avec TensorFlow et les CNNs pour la reconnaissance et classification d\'images. Son système de reconnaissance d\'utilisateurs atteint 92.26% de précision sur son propre visage et 100% sur Messi ! 🧠' },
+    // Qt6
+    { k:['qt','qt6','interface','gui','interface graphique','ihm'],
+      r:'Ahmed développe des interfaces graphiques avec Qt6/PyQt. Chez WEMAKER, il a créé un GUI complet pour le système de calibration automatique de pièces imprimées 3D. 🖥️' },
+    // Projets général
+    { k:['projet','projects','réalisation','work','portfolio'],
+      r:'Ahmed a 5 projets majeurs :\n🦾 Bras Robotique 4DOF (MATLAB/Simscape)\n🤖 Robot Mobile SLAM (ROS2/Gazebo)\n✋ Reconnaissance Gestuelle (OpenCV)\n👤 Reconnaissance Utilisateurs (TensorFlow/Docker)\n📏 Mesure Distance ArUco (OpenCV)\nClique sur un projet pour les détails !' },
+    // Bras robotique
+    { k:['bras','arm','4dof','dof','robotic arm','simscape'],
+      r:'🦾 Bras Robotique 4DOF : Ahmed a conçu et simulé un bras robotique à 4 degrés de liberté sous MATLAB/Simscape. Inclut la modélisation cinématique directe/inverse et l\'analyse dynamique des mouvements.\n→ github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB' },
+    // Robot SLAM
+    { k:['r.px0','rpx0','robot mobile','slam robot','désherbage','weed','gazebo robot'],
+      r:'🤖 Robot R.PX0 : Robot mobile autonome de désherbage. Conçu sous SolidWorks, simulé sous ROS2/Gazebo. Intègre SLAM gmapping, YOLOv8 pour la détection de mauvaises herbes, et une fusion LIDAR/GPS/IMU/caméra.\n→ github.com/ahmedriaahi/R_PX0-autonomous-robot' },
+    // Geste
+    { k:['geste','gesture','doigt','finger','main','hand','mediapipe'],
+      r:'✋ Reconnaissance Gestuelle : Système de détection du nombre de doigts levés en temps réel par vision artificielle. Utilise OpenCV pour le traitement d\'image et la détection des contours de la main.' },
+    // User Recognition
+    { k:['reconnaissance utilisateur','user recognition','identification','visage','face','biométrie'],
+      r:'👤 Reconnaissance Utilisateurs : Identification en temps réel avec TensorFlow. Précision : Ahmed 92.26%, Messi 100% 🎯. Déploiement conteneurisé avec Docker.\n→ github.com/ahmedriaahi/Real-Time-User-Recognition-' },
+    // ArUco
+    { k:['aruco','marqueur','marker','distance','mesure','calibration caméra','camera calibration'],
+      r:'📏 Mesure Distance ArUco : Système temps réel de détection et estimation de distance par marqueurs ArUco. Inclut la calibration caméra automatique. Projet en cours de développement 🚧' },
+    // WeMake
+    { k:['wemaker','wemake','startup','stage ingénieur','impression 3d','3d printing','calibration'],
+      r:'🏭 Chez WEMAKER (07–08/2026) : Ahmed a développé un système de calibration automatique pour pièces imprimées 3D. Résultat : débit passé de 7 à 95 pièces/jour (+1257% !) grâce à la vision par ordinateur et les marqueurs ArUco.' },
+    // ISET Mémoire
+    { k:['mémoire','fin d\'études','pfe','thesis','iset projet','robot désherbage'],
+      r:'📚 Mémoire ISET (02–06/2025) : Robot mobile autonome de désherbage combinant YOLOv8 (détection temps réel) + SLAM sous ROS2/Gazebo. Multi-capteurs : LIDAR, GPS, IMU, caméra. Projet de fin de Master Robotique & IA.' },
+    // Tech Power
+    { k:['tech power','techpower','siemens','automate','plc','ladder','tia portal','step7','hmi'],
+      r:'🏭 Tech Power Electronics Group :\n• Stage PFE (03–05/2023) : Automatisation machine Charge-Lames en Ladder (TIA Portal/STEP7), automate Siemens S7, HMI KTP600\n• Stage Perfectionnement (01–02/2022) : Analyse & programmation machine Soudure-de-Lames' },
+    // Certifications
+    { k:['certification','certificat','nvidia','azure','microsoft','cisco','coursera','stanford','delf','diplôme'],
+      r:'🏆 Certifications d\'Ahmed :\n• NVIDIA — AI for Predictive Maintenance (2026)\n• Microsoft Azure AI Fundamentals (2024)\n• Cisco Cybersecurity (2024)\n• ML Specialization — Stanford/DeepLearning.AI (2024)\n• DELF B2 Français (2023)' },
+    // Langues
+    { k:['langue','language','français','french','anglais','english','arabe','arabic','parle','speak','bilingue'],
+      r:'🌍 Ahmed parle :\n• Arabe : langue maternelle\n• Français : courant (DELF B2 certifié)\n• Anglais : professionnel' },
+    // Localisation
+    { k:['où','where','location','tunisie','tunisia','bizerte','basé','based'],
+      r:'📍 Ahmed est basé à Bizerte, Tunisie. Il est ouvert aux opportunités locales et internationales, y compris la mobilité complète pour les stages et offres d\'emploi à l\'étranger.' },
+    // Salutation
+    { k:['bonjour','salut','hello','hi','hey','bonsoir','coucou','salam'],
+      r:'Bonjour ! 👋 Je suis l\'assistant d\'Ahmed Riahi. Pose-moi une question sur ses compétences, projets, formation ou expériences !' },
+    // Remerciement
+    { k:['merci','thank','thanks','super','génial','cool','parfait','bravo','excellent'],
+      r:'Avec plaisir ! 😊 N\'hésite pas si tu as d\'autres questions sur Ahmed.' },
+    // Default
+    { k:[], r:'' }
+  ],
+  en: [
+    { k:['who are you','who is ahmed','about you','tell me about','introduce'],
+      r:'Ahmed Riahi is a mechatronics engineer based in Bizerte, Tunisia. Specialized in autonomous robotics, computer vision and embedded AI. Currently in Engineering Cycle at ESPRIT (2nd in class, 14.99/20). 🤖' },
+    { k:['contact','email','linkedin','github','reach','social'],
+      r:'📧 ahmed.riahi@esprit.tn\n💼 linkedin.com/in/riahi-ahmed\n💻 github.com/ahmedriaahi\nFeel free to reach out for any opportunity!' },
+    { k:['available','availability','internship','job','hire','recruit','open to','work'],
+      r:'✅ Ahmed is available from January 2027 for a research internship, work-study or job offer — national and international opportunities welcome!' },
+    { k:['mitacs','globalink','canada','research'],
+      r:'Ahmed is applying to the Mitacs Globalink program for a research internship in Canada in robotics or computer vision. 🍁' },
+    { k:['skill','technology','stack','tools','languages','know','expertise'],
+      r:'🛠️ Ahmed\'s Stack:\n• Frameworks: ROS2, OpenCV, TensorFlow, YOLOv8\n• Languages: Python, C++, C, MATLAB\n• Tools: Docker, Qt6, Linux, GitHub\n• Simulation: Gazebo, RViz, Webots, SolidWorks' },
+    { k:['education','degree','university','esprit','iset','master','bachelor','formation'],
+      r:'Ahmed\'s Background:\n🎓 2025–2027: Mechatronics Engineering — ESPRIT (2nd/class, 14.99/20)\n🎓 2023–2025: Master Robotics & AI — ISET Bizerte\n🎓 2020–2023: Bachelor Electrical Engineering — ISET Bizerte' },
+    { k:['ros','ros2','navigation','autonomous'],
+      r:'Ahmed masters ROS2 (Humble) and ROS1 (Noetic) for autonomous navigation, SLAM, sensor management (LIDAR, IMU, GPS) and 3D URDF integration. 🤖' },
+    { k:['opencv','vision','computer vision','yolo','detection'],
+      r:'Ahmed is an expert in computer vision with OpenCV and YOLOv8: gesture recognition, user identification, ArUco marker calibration and weed detection. 👁️' },
+    { k:['slam','mapping','lidar','localization','autonomous navigation'],
+      r:'Ahmed implemented SLAM gmapping under ROS2/Gazebo for the autonomous R.PX0 robot. It generates 2D maps and navigates autonomously with virtual LIDAR and multi-sensor fusion. 🗺️' },
+    { k:['project','projects','portfolio','work','realisation'],
+      r:'Ahmed\'s 5 major projects:\n🦾 4DOF Robotic Arm (MATLAB/Simscape)\n🤖 Mobile SLAM Robot (ROS2/Gazebo)\n✋ Gesture Recognition (OpenCV)\n👤 User Recognition (TensorFlow/Docker)\n📏 ArUco Distance Measurement (OpenCV)' },
+    { k:['wemaker','startup','3d printing','calibration','internship engineer'],
+      r:'🏭 At WEMAKER (07–08/2026): Ahmed built an automatic calibration system for 3D printed parts. Output went from 7 to 95 parts/day (+1257%!) using computer vision and ArUco markers.' },
+    { k:['certification','nvidia','azure','microsoft','cisco','coursera','stanford','delf'],
+      r:'🏆 Ahmed\'s Certifications:\n• NVIDIA — AI for Predictive Maintenance (2026)\n• Microsoft Azure AI Fundamentals (2024)\n• Cisco Cybersecurity (2024)\n• ML Specialization — Stanford/DeepLearning.AI (2024)\n• DELF B2 French (2023)' },
+    { k:['language','french','english','arabic','speak','bilingual'],
+      r:'🌍 Ahmed speaks:\n• Arabic: native\n• French: fluent (DELF B2)\n• English: professional' },
+    { k:['where','location','tunisia','bizerte','based'],
+      r:'📍 Ahmed is based in Bizerte, Tunisia. Open to local and international opportunities, including full mobility for internships and jobs abroad.' },
+    { k:['hello','hi','hey','good morning','good evening'],
+      r:'Hello! 👋 I\'m Ahmed Riahi\'s assistant. Ask me about his skills, projects, education or experience!' },
+    { k:['thank','thanks','great','awesome','perfect','cool'],
+      r:'You\'re welcome! 😊 Feel free to ask more questions about Ahmed.' },
+    { k:[], r:'' }
+  ]
+};
 
 function toggleChat() {
   const c = document.getElementById('chatbot');
@@ -959,130 +991,43 @@ function toggleChat() {
   if (!isOpen) setTimeout(() => document.getElementById('chat-input').focus(), 100);
 }
 
-function resetGeminiKey() {
-  localStorage.removeItem('gmk');
-  const newKey = prompt('🔑 Nouvelle clé Gemini API :');
-  if (newKey && newKey.trim()) {
-    localStorage.setItem('gmk', newKey.trim());
-    showToast(lang === 'fr' ? '✅ Clé API mise à jour !' : '✅ API key updated!');
-  }
-}
-
-async function sendMsg() {
+function sendMsg() {
   const inp = document.getElementById('chat-input');
   const msg = inp.value.trim();
-  if (!msg || inp.disabled) return;
-
+  if (!msg) return;
   addMsg(msg, 'user');
   inp.value = '';
-  inp.disabled = true;
-  document.querySelector('.chat-send').disabled = true;
 
-  // Message de chargement animé
-  const loadId = 'load_' + Date.now();
-  addMsg('', 'bot', loadId, true);
+  setTimeout(() => {
+    const reply = getReply(msg);
+    addMsg(reply, 'bot');
+  }, 400);
+}
 
-  // Ajouter au contexte
-  chatHistory.push({ role: 'user', parts: [{ text: msg }] });
+function getReply(msg) {
+  const low = msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const dict = lang === 'en' ? FAQ.en : FAQ.fr;
 
-  try {
-    // ── GEMINI API GRATUITE ──
-    // La clé est stockée dans localStorage — jamais dans le code source
-    let GEMINI_KEY = localStorage.getItem('gmk') || '';
-    if (!GEMINI_KEY) {
-      GEMINI_KEY = prompt('🔑 Entre ta clé Gemini API (aistudio.google.com/app/apikey) :');
-      if (!GEMINI_KEY) {
-        const loadEl = document.getElementById(loadId);
-        if (loadEl) { loadEl.classList.remove('loading'); loadEl.textContent = lang==='fr' ? 'Clé API manquante. Réessaie.' : 'API key missing. Try again.'; }
-        inp.disabled = false; document.querySelector('.chat-send').disabled = false;
-        return;
-      }
-      localStorage.setItem('gmk', GEMINI_KEY.trim());
-    }
-    GEMINI_KEY = GEMINI_KEY.trim();
-
-    // Construction des messages avec historique (format Gemini)
-    const contents = [
-      // Message système injecté en premier comme message user/model
-      { role: 'user',  parts: [{ text: AHMED_PROFILE }] },
-      { role: 'model', parts: [{ text: 'Compris ! Je suis prêt à répondre à toutes les questions sur Ahmed Riahi.' }] },
-      // Historique de la conversation (max 10 derniers échanges)
-      ...chatHistory.slice(-10)
-    ];
-
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents,
-          generationConfig: {
-            maxOutputTokens: 350,
-            temperature: 0.7,
-          }
-        })
-      }
-    );
-
-    const data = await response.json();
-    const loadEl = document.getElementById(loadId);
-
-    // Détecter les erreurs API Gemini (clé invalide, quota, etc.)
-    if (data.error) {
-      const code = data.error.status || '';
-      let errMsg = '';
-      if (code === 'INVALID_ARGUMENT' || code === 'UNAUTHENTICATED' || data.error.code === 400 || data.error.code === 401) {
-        // Clé invalide → on la supprime et on redemande
-        localStorage.removeItem('gmk');
-        errMsg = lang === 'fr'
-          ? '🔑 Clé API invalide. Clique sur 🔑 pour entrer une clé valide.'
-          : '🔑 Invalid API key. Click 🔑 to enter a valid key.';
-      } else if (data.error.code === 429) {
-        errMsg = lang === 'fr'
-          ? '⏳ Quota dépassé. Réessaie dans une minute.'
-          : '⏳ Quota exceeded. Try again in a minute.';
-      } else {
-        errMsg = `⚠️ Erreur API : ${data.error.message || data.error.status}`;
-      }
-      if (loadEl) { loadEl.classList.remove('loading'); loadEl.textContent = errMsg; }
-      inp.disabled = false; document.querySelector('.chat-send').disabled = false;
-      return;
-    }
-
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text
-      || (lang === 'fr'
-        ? "Désolé, je n'ai pas pu répondre. Contacte Ahmed : ahmed.riahi@esprit.tn"
-        : "Sorry, I couldn't respond. Contact Ahmed: ahmed.riahi@esprit.tn");
-
-    if (loadEl) {
-      loadEl.classList.remove('loading');
-      loadEl.textContent = reply;
-    }
-
-    chatHistory.push({ role: 'model', parts: [{ text: reply }] });
-
-  } catch (e) {
-    const loadEl = document.getElementById(loadId);
-    if (loadEl) {
-      loadEl.classList.remove('loading');
-      loadEl.textContent = lang === 'fr'
-        ? `⚠️ Erreur réseau : ${e.message}. Vérifie ta connexion.`
-        : `⚠️ Network error: ${e.message}. Check your connection.`;
+  for (const entry of dict) {
+    if (entry.k.length === 0) continue;
+    if (entry.k.some(k => low.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g, '')))) {
+      return entry.r;
     }
   }
 
-  inp.disabled = false;
-  document.querySelector('.chat-send').disabled = false;
-  inp.focus();
+  // Réponse par défaut bilingue
+  return lang === 'fr'
+    ? '🤔 Je n\'ai pas compris ta question. Essaie par exemple :\n• "Quelles sont tes compétences ?"\n• "Parle-moi de tes projets"\n• "Tu es disponible quand ?"\n• "Comment te contacter ?"'
+    : '🤔 I didn\'t understand. Try for example:\n• "What are your skills?"\n• "Tell me about your projects"\n• "When are you available?"\n• "How to contact you?"';
 }
 
-function addMsg(text, type, id = null, loading = false) {
+function addMsg(text, type) {
   const m = document.getElementById('chat-messages');
   const d = document.createElement('div');
-  d.className = 'chat-msg ' + type + (loading ? ' loading' : '');
-  if (id) d.id = id;
-  d.textContent = loading ? '...' : text;
+  d.className = 'chat-msg ' + type;
+  // Supporter les sauts de ligne dans les réponses
+  d.style.whiteSpace = 'pre-line';
+  d.textContent = text;
   m.appendChild(d);
   m.scrollTop = m.scrollHeight;
 }
