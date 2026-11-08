@@ -471,6 +471,16 @@
         <div class="skill-icon"><span style="font-size:1.8rem">🌐</span><span>Webots</span></div>
       </div>
     </div>
+    <div class="skill-category fade-in">
+      <h4>IoT & Protocoles</h4>
+      <div class="skills-icons">
+        <div class="skill-icon"><span style="font-size:1.8rem">📡</span><span>MQTT</span></div>
+        <div class="skill-icon"><span style="font-size:1.8rem">🔴</span><span>Node-RED</span></div>
+        <div class="skill-icon"><span style="font-size:1.8rem">⚡</span><span>ESP32</span></div>
+        <div class="skill-icon"><span style="font-size:1.8rem">🗄️</span><span>SQLite</span></div>
+        <div class="skill-icon"><span style="font-size:1.8rem">🔤</span><span>EasyOCR</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -562,6 +572,20 @@
         <h3><span data-lang="fr">Mesure Distance ArUco</span><span data-lang="en">ArUco Distance Measurement</span></h3>
         <p><span data-lang="fr">Détection et estimation de distance par marqueurs ArUco.</span><span data-lang="en">Distance estimation using ArUco markers.</span></p>
         <div class="tags"><span class="tag">OpenCV</span><span class="tag">ArUco</span><span class="tag">Python</span></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('anpr')">
+      <video class="project-thumb-video" muted loop playsinline
+        onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <source src="https://github.com/ahmedriaahi/ANPR_Infraction/raw/main/preuves/Node-RED%20Dashboard.mp4" type="video/mp4">
+      </video>
+      <div class="project-thumb-placeholder" style="display:none">🚗</div>
+      <div class="project-body">
+        <h3><span data-lang="fr">ANPR — Détection d'Infractions IoT</span><span data-lang="en">ANPR — IoT Infraction Detection</span></h3>
+        <p><span data-lang="fr">Détection sens interdit, lecture de plaques YOLO+EasyOCR, dashboard Node-RED via MQTT.</span><span data-lang="en">Wrong-way detection, license plate reading with YOLO+EasyOCR, Node-RED dashboard via MQTT.</span></p>
+        <div class="tags"><span class="tag">YOLOv8</span><span class="tag">EasyOCR</span><span class="tag">MQTT</span><span class="tag">Node-RED</span><span class="tag">IoT</span><span class="tag">ESP32</span></div>
       </div>
     </div>
   </div>
@@ -775,7 +799,8 @@ const modals={
   slam:{title:'Robot Mobile Autonome — SLAM',gallery:[`<img src="assets/slam1.png" alt="Robot R.PX0" loading="lazy">`,`<img src="assets/slam2.png" alt="Navigation RViz" loading="lazy">`],desc:`Conception du robot mobile R.PX0 en 3D sous SolidWorks exporté en URDF. Implémentation du SLAM gmapping pour la génération de cartes 2D et la navigation autonome sous Gazebo.`,tags:['ROS2','Gazebo','RViz','SLAM','SolidWorks','URDF','LIDAR'],links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/R_PX0-autonomous-robot'}]},
   gesture:{title:'Reconnaissance Gestuelle par Vision Artificielle',gallery:[`<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7298771712739803136" allowfullscreen></iframe>`],desc:`Développé un système de reconnaissance gestuelle pour détecter le nombre de doigts levés en temps réel par vision artificielle. Utilisation d'OpenCV pour le traitement d'image.`,tags:['OpenCV','Python','Computer Vision','Real-time','MediaPipe'],links:[{label:'→ Voir démo LinkedIn',url:'https://www.linkedin.com/feed/update/urn:li:activity:7298771712739803136'}]},
   user:{title:'Système de Reconnaissance d\'Utilisateurs',gallery:[`<img src="assets/user1.png" alt="Ahmed 92.26%" loading="lazy">`,`<img src="assets/user2.jpg" alt="Messi 100%" loading="lazy">`],desc:`Identification en temps réel via TensorFlow (Ahmed: 92.26%, Messi: 100%). Déploiement conteneurisé avec Docker pour la portabilité du système.`,tags:['TensorFlow','OpenCV','Docker','Python','Deep Learning','CNN'],links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/Real-Time-User-Recognition-'}]},
-  aruco:{title:'Système de Mesure de Distance — ArUco',gallery:[`<video controls src="https://github.com/ahmedriaahi/ahmedriaahi.github.io/raw/main/assets/VID_20260630_123937_1.mp4"></video>`],desc:`Développement d'un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra intégrée. 🚧 Projet en cours — images coming soon.`,tags:['OpenCV','ArUco','Python','Camera Calibration','Real-time'],links:[]}
+  aruco:{title:'Système de Mesure de Distance — ArUco',gallery:[`<video controls src="https://github.com/ahmedriaahi/ahmedriaahi.github.io/raw/main/assets/VID_20260630_123937_1.mp4"></video>`],desc:`Développement d'un système temps réel de détection et d'estimation de distance par marqueurs ArUco avec calibration caméra intégrée. 🚧 Projet en cours — images coming soon.`,tags:['OpenCV','ArUco','Python','Camera Calibration','Real-time'],links:[]},
+  anpr:{title:'ANPR — Détection d\'Infractions IoT',gallery:[`<video controls src="https://github.com/ahmedriaahi/ANPR_Infraction/raw/main/preuves/Node-RED%20Dashboard.mp4"></video>`],desc:`Système IoT complet de détection de véhicules en sens interdit et lecture automatique de plaques d'immatriculation.\n\n🔍 Détection : modèle YOLO (carplater) + ByteTrack pour le suivi multi-objets. Algorithme de sens interdit basé sur la variation de surface de la boîte détectée (+25% minimum).\n\n📖 Lecture OCR : EasyOCR (arabe + anglais) avec CLAHE et vote 2/7 pour valider la lecture. Formats TUN, RS et français gérés.\n\n💾 Stockage : SQLite + images preuves horodatées, recherche propriétaire via CSV.\n\n📡 IoT : diffusion JSON sur MQTT (Cedalo), flux caméra temps réel 8 img/s. Dashboard Node-RED complet : contrôle caméra, alertes infractions, capteurs ESP32 (température, humidité, gaz, GPS, IR).\n\n📊 Résultats : 45 infractions enregistrées, 30 plaques lues correctement.`,tags:['YOLOv8','EasyOCR','MQTT','Node-RED','IoT','ESP32','SQLite','ByteTrack','Python','OpenCV'],links:[{label:'→ GitHub',url:'https://github.com/ahmedriaahi/ANPR_Infraction'}]}
 };
 
 function openModal(id){
@@ -904,7 +929,7 @@ const FAQ = {
       r:'Ahmed développe des interfaces graphiques avec Qt6/PyQt. Chez WEMAKER, il a créé un GUI complet pour le système de calibration automatique de pièces imprimées 3D. 🖥️' },
     // Projets général
     { k:['projet','projects','réalisation','work','portfolio'],
-      r:'Ahmed a 5 projets majeurs :\n🦾 Bras Robotique 4DOF (MATLAB/Simscape)\n🤖 Robot Mobile SLAM (ROS2/Gazebo)\n✋ Reconnaissance Gestuelle (OpenCV)\n👤 Reconnaissance Utilisateurs (TensorFlow/Docker)\n📏 Mesure Distance ArUco (OpenCV)\nClique sur un projet pour les détails !' },
+      r:'Ahmed a 6 projets majeurs :\n🦾 Bras Robotique 4DOF (MATLAB/Simscape)\n🤖 Robot Mobile SLAM (ROS2/Gazebo)\n✋ Reconnaissance Gestuelle (OpenCV)\n👤 Reconnaissance Utilisateurs (TensorFlow/Docker)\n📏 Mesure Distance ArUco (OpenCV)\n🚗 ANPR IoT — Détection d\'Infractions (YOLO+MQTT)\nClique sur un projet pour les détails !' },
     // Bras robotique
     { k:['bras','arm','4dof','dof','robotic arm','simscape'],
       r:'🦾 Bras Robotique 4DOF : Ahmed a conçu et simulé un bras robotique à 4 degrés de liberté sous MATLAB/Simscape. Inclut la modélisation cinématique directe/inverse et l\'analyse dynamique des mouvements.\n→ github.com/ahmedriaahi/4DOF-Robotic-Arm-Simscape-MATLAB' },
@@ -920,6 +945,9 @@ const FAQ = {
     // ArUco
     { k:['aruco','marqueur','marker','distance','mesure','calibration caméra','camera calibration'],
       r:'📏 Mesure Distance ArUco : Système temps réel de détection et estimation de distance par marqueurs ArUco. Inclut la calibration caméra automatique. Projet en cours de développement 🚧' },
+    // ANPR
+    { k:['anpr','plaque','immatriculation','infraction','sens interdit','nodered','node-red','mqtt','iot','esp32','easyocr','bytetrack','sqlite'],
+      r:'🚗 ANPR IoT (nouveau projet) : Système complet de détection de véhicules en sens interdit et lecture automatique de plaques. YOLO + ByteTrack pour la détection, EasyOCR pour la lecture OCR (arabe+anglais), stockage SQLite, dashboard Node-RED via MQTT. Capteurs ESP32 intégrés (GPS, temp, gaz...).\n→ github.com/ahmedriaahi/ANPR_Infraction' },
     // WeMake
     { k:['wemaker','wemake','startup','stage ingénieur','impression 3d','3d printing','calibration'],
       r:'🏭 Chez WEMAKER (07–08/2026) : Ahmed a développé un système de calibration automatique pour pièces imprimées 3D. Résultat : débit passé de 7 à 95 pièces/jour (+1257% !) grâce à la vision par ordinateur et les marqueurs ArUco.' },
@@ -966,8 +994,10 @@ const FAQ = {
       r:'Ahmed is an expert in computer vision with OpenCV and YOLOv8: gesture recognition, user identification, ArUco marker calibration and weed detection. 👁️' },
     { k:['slam','mapping','lidar','localization','autonomous navigation'],
       r:'Ahmed implemented SLAM gmapping under ROS2/Gazebo for the autonomous R.PX0 robot. It generates 2D maps and navigates autonomously with virtual LIDAR and multi-sensor fusion. 🗺️' },
+    { k:['anpr','license plate','infraction','wrong way','node-red','mqtt','iot','esp32','easyocr','bytetrack','sqlite'],
+      r:'🚗 ANPR IoT (new project): Full IoT system for wrong-way vehicle detection and automatic license plate reading. YOLO + ByteTrack for detection, EasyOCR for OCR (Arabic+English), SQLite storage, Node-RED dashboard via MQTT. ESP32 sensors integrated (GPS, temp, gas...).\n→ github.com/ahmedriaahi/ANPR_Infraction' },
     { k:['project','projects','portfolio','work','realisation'],
-      r:'Ahmed\'s 5 major projects:\n🦾 4DOF Robotic Arm (MATLAB/Simscape)\n🤖 Mobile SLAM Robot (ROS2/Gazebo)\n✋ Gesture Recognition (OpenCV)\n👤 User Recognition (TensorFlow/Docker)\n📏 ArUco Distance Measurement (OpenCV)' },
+      r:'Ahmed\'s 6 major projects:\n🦾 4DOF Robotic Arm (MATLAB/Simscape)\n🤖 Mobile SLAM Robot (ROS2/Gazebo)\n✋ Gesture Recognition (OpenCV)\n👤 User Recognition (TensorFlow/Docker)\n📏 ArUco Distance Measurement (OpenCV)\n🚗 ANPR IoT Infraction System (YOLO+MQTT)' },
     { k:['wemaker','startup','3d printing','calibration','internship engineer'],
       r:'🏭 At WEMAKER (07–08/2026): Ahmed built an automatic calibration system for 3D printed parts. Output went from 7 to 95 parts/day (+1257%!) using computer vision and ArUco markers.' },
     { k:['certification','nvidia','azure','microsoft','cisco','coursera','stanford','delf'],
